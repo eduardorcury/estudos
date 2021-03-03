@@ -1,22 +1,32 @@
 # Backend com Node.js
 
+
 > Next Level Week #4
+
+
+
 
 
 
 ### Configuração de API
 
+
 ---
+
 
 #### Dependências
 
+
 - express
+
 
   ```bash
   npm install express
   ```
 
+
 - Tipagem
+
 
   ```bash
   npm install --save-dev @types/express
@@ -24,42 +34,61 @@
 
   
 
+
+  
+
 ----
 
+
 #### Métodos
+
 
 ```typescript
 import express from 'express';
 
+
 const app = express();
+
 
 app.get("/", (request, response) => {
     return response.json({ message: "Hello World - NLW #4" });
 });
 
+
 app.post("/", (request, response) => {
     return response.json({ message: "Dados salvos com sucesso" });
 });
 
+
 app.listen(3333, () => console.log('Servidor rodando!'));
+
 
 ```
 
 
 
+
+
+
 ### Conexão com Banco de Dados
+
 
 ---
 
+
 #### Dependências
 
+
 - ORM
+
 
   ```bash
   npm install typeorm reflect-metadata
   ```
 
+
 - Banco de dados
+
 
   ```bash
   npm install sqlite3
@@ -67,11 +96,17 @@ app.listen(3333, () => console.log('Servidor rodando!'));
 
 
 
+
+
+
 ---
+
 
 #### Configuração
 
+
 1. Criar arquivo **ormconfig.json**
+
 
    ```json
    {
@@ -86,7 +121,9 @@ app.listen(3333, () => console.log('Servidor rodando!'));
    }
    ```
 
+
 2. Criar arquivo **database/index.ts**
+
 
    ```typescript
    import { createConnection } from 'typeorm';
@@ -94,13 +131,18 @@ app.listen(3333, () => console.log('Servidor rodando!'));
    createConnection();
    ```
 
+
    
+
 
 ---
 
+
 #### Migrations
 
+
 1. Adicionar script no **package.json**
+
 
    ```json
    {
@@ -108,31 +150,42 @@ app.listen(3333, () => console.log('Servidor rodando!'));
    }
    ```
 
+
 2. Criar Migration
+
 
    ```bash
    npm run-script typeorm migration:create -- -n <Nome da Migration>
    ```
 
+
 3. Executar Migration
+
 
    ```bash
    npm run-script typeorm migration:run
    ```
 
+
 4. Reverter Migration
+
 
    ```bash
    npm run-script typeorm migration:revert
    ```
 
+
    
+
 
 ---
 
+
 #### Criação da Tabela
 
+
 - Código dentro da migration criada:
+
 
   ```typescript
   import {MigrationInterface, QueryRunner, Table} from "typeorm";
@@ -177,29 +230,44 @@ app.listen(3333, () => console.log('Servidor rodando!'));
 
 
 
+
+
+
+
 ### Roteamento e Express
+
 
 ---
 
+
 #### Arquivo de rotas
+
 
 ```typescript
 import { Router } from "express";
 import { UserController } from "./controllers/UserController";
 
+
 const router = Router();
 const userController = new UserController();
 
+
 router.post("/users", userController.create);
+
 
 export { router };
 ```
 
 
 
+
+
+
 ---
 
+
 #### Arquivo *server.ts*
+
 
 ```typescript
 import 'reflect-metadata';
@@ -207,24 +275,35 @@ import express from 'express';
 import "./database";
 import { router } from './routes';
 
+
 const app = express();
+
 
 app.use(express.json());
 app.use(router);
 
+
 app.listen(3333, () => console.log('Servidor rodando!'));
+
 
 ```
 
 
 
+
+
+
 ### Criação da Entidade
+
 
 ---
 
+
 #### Dependências
 
+
 - UUID
+
 
   ```bash
   npm install uuid
@@ -233,11 +312,17 @@ app.listen(3333, () => console.log('Servidor rodando!'));
 
 
 
+
+
+
 ---
+
 
 #### Classe de domínio
 
+
 - Arquivo **model/user.ts**
+
 
   ```typescript
   import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
@@ -271,11 +356,17 @@ app.listen(3333, () => console.log('Servidor rodando!'));
 
 
 
+
+
+
 ---
+
 
 #### Modificação em *ormconfig.json*
 
+
 - Adicionar entidades ao arquivo de configuração:
+
 
   ```json
   {
@@ -285,18 +376,28 @@ app.listen(3333, () => console.log('Servidor rodando!'));
 
 
 
+
+
+
 ### Repositório
+
 
 ---
 
+
 #### Classe
+
 
 ```typescript
 import { EntityRepository, Repository } from "typeorm";
 import { User } from "../models/user";
 
+
 @EntityRepository(User)
 class UsersRepository extends Repository<User> {
+
+}
+
 
 }
 
@@ -305,11 +406,17 @@ export { UsersRepository };
 
 
 
+
+
+
 ### Controlador
+
 
 ---
 
+
 #### Funções
+
 
 - [x] Deve possuir métodos que serão usados pela classe de rotas para realizar as funções da API.
 - [x] Obtém o repositório e o usa para salvar as entidades a partir do *json* das requisições.
@@ -318,20 +425,29 @@ export { UsersRepository };
 
 
 
+
+
+
 ---
 
+
 #### Classe
+
 
 ```typescript
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
 import { UsersRepository } from "../repositories/usersRepository";
 
+
 class UserController {
+
 
     async create(request: Request, response: Response) {
 
+
         const { name, email } = request.body;
+
 
         const userRepository = getCustomRepository(UsersRepository);
         
@@ -339,20 +455,27 @@ class UserController {
             email
         });
 
+
         if (userAlreadyExists) {
             return response.status(400).json({
                 erro: "Email já cadastrado"
             })
         }
 
+
         const user = userRepository.create({
             name, email
         });
 
+
         await userRepository.save(user);
         return response.status(201).json(user);
 
+
     }
+
+}
+
 
 }
 
@@ -361,32 +484,46 @@ export { UserController };
 
 
 
+
+
+
 ### Testes Automatizados
+
 
 ---
 
+
 #### Dependências
 
+
 - Jest
+
 
   ```bash
   npm install --save-dev jest
   ```
 
+
 - Tipagem
+
 
   ```bash
   npm install --save-dev @types/jest
   ```
 
 
+
+
 - Com Typescript
+
 
   ```bash
   npm install --save-dev ts-jest
   ```
 
+
 - Supertest (para criar *requests*)
+
 
   ```bash
   npm install --save-dev supertest @types/supertest
@@ -394,11 +531,17 @@ export { UserController };
 
   
 
+
+  
+
 ---
+
 
 #### Configuração
 
+
 - Adicionar script *test*
+
 
   ```json
   {
@@ -408,23 +551,31 @@ export { UserController };
   }
   ```
 
+
 - Executar comando *init*
+
 
   ```bash
   npm test -- --init
   ```
 
 
+
+
 ---
 
+
 #### Separação de ambientes
+
 
 - [x] Criar arquivo *.ts* que exporta o express
 - [x] Modificar *server.ts* para somente rodar o servidor
 - [x] Criar arquivo responsável por criar a conexão com banco
 - [x] Inserir variável de ambiente ao executar comando de teste
 
+
 - Arquivo *app.ts*
+
 
   ```typescript
   import 'reflect-metadata';
@@ -441,7 +592,9 @@ export { UserController };
   export { app };
   ```
 
+
 - Arquivo *server.ts*
+
 
   ```typescript
   import { app } from "./app";
@@ -449,7 +602,9 @@ export { UserController };
   app.listen(3333, () => console.log('Servidor rodando!'));
   ```
 
+
 - Arquivo *index.ts* na pasta *database*
+
 
   ```typescript
   import { Connection, createConnection, getConnectionOptions } from 'typeorm';
@@ -469,7 +624,9 @@ export { UserController };
   }
   ```
 
+
 - Comando *test*
+
 
   ```json
   {
@@ -479,4 +636,8 @@ export { UserController };
   }
   ```
 
+
   
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNzcxNTc5MjEwXX0=
+-->
