@@ -268,8 +268,14 @@ O import da biblioteca é feito no começo do arquivo:
 > Neste caso, a primeira requisição retornará um status code de **direcionamento** (301 ou 302).
 
 > Como a requisição não é "passada" para o navegador, os atributos dela também não serão passados.
+
+## PUT & DELETE
+
+> Perguntar sobre PUT
+> Ele não usou doDelete???
+> Input hidden nao funciona XDDDDD
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNDI5MjMyNzAsLTE1NDExNjI3MzUsLT
+eyJoaXN0b3J5IjpbLTE3NDc0NTE5NjgsLTE1NDExNjI3MzUsLT
 czMTUzMDM1NCwxMDE1MzIxODc2LDE3MjM4NzQ0NTksLTI5MjY1
 MzY0OSwtMTg4MTA2NDU1OCwxMDg5MTY1NTIyLDk3NjYwMjYxMi
 wtMTQ5Mzg4MjAwNywtODY1NjMwNzU4LDE4NDg4NzY0MTYsNDIw
