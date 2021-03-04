@@ -12,6 +12,8 @@
 	```
 	http://localhost:8080/gerenciador/bem-vindo.html
 	```
+- É um servlet container, responsável por criar os servlets (*lazy* por padrão);
+
 ## Criando Servlet
 
 - Criar classe que herda de **`HttpServlet`**;
@@ -269,15 +271,10 @@ O import da biblioteca é feito no começo do arquivo:
 
 > Como a requisição não é "passada" para o navegador, os atributos dela também não serão passados.
 
-## PUT & DELETE
-
-> Perguntar sobre PUT
-> Ele não usou doDelete???
-> Input hidden nao funciona XDDDDD
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NDc0NTE5NjgsLTE1NDExNjI3MzUsLT
-czMTUzMDM1NCwxMDE1MzIxODc2LDE3MjM4NzQ0NTksLTI5MjY1
-MzY0OSwtMTg4MTA2NDU1OCwxMDg5MTY1NTIyLDk3NjYwMjYxMi
-wtMTQ5Mzg4MjAwNywtODY1NjMwNzU4LDE4NDg4NzY0MTYsNDIw
-NjYyNjc0XX0=
+eyJoaXN0b3J5IjpbLTEwNjk3OTYwMDYsLTE3NDc0NTE5NjgsLT
+E1NDExNjI3MzUsLTczMTUzMDM1NCwxMDE1MzIxODc2LDE3MjM4
+NzQ0NTksLTI5MjY1MzY0OSwtMTg4MTA2NDU1OCwxMDg5MTY1NT
+IyLDk3NjYwMjYxMiwtMTQ5Mzg4MjAwNywtODY1NjMwNzU4LDE4
+NDg4NzY0MTYsNDIwNjYyNjc0XX0=
 -->
