@@ -250,9 +250,28 @@ O import da biblioteca é feito no começo do arquivo:
 	</body>
 </html>
 ```
+
+## Redirecionamento
+
+- Redirecionamento *server-side*: quando um *Servlet* faz uma requisição a outro *Servlet* a partir de um *dispatcher*;
+
+	```java 
+	RequestDispatcher dispatcher = 	request.getRequestDispatcher("/listaEmpresas");
+	```
+	
+- Redirecionamento *client-side*: o *Servlet* usa o navegador como intermediário.
+
+	```java 
+	response.sendRedirect("listaEmpresas");
+	```
+	
+> Neste caso, a primeira requisição retornará um status code de **direcionamento** (301 ou 302).
+
+> Como a requisição não é "passada" para o navegador, os atributos dela também não serão passados.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NDExNjI3MzUsLTczMTUzMDM1NCwxMD
-E1MzIxODc2LDE3MjM4NzQ0NTksLTI5MjY1MzY0OSwtMTg4MTA2
-NDU1OCwxMDg5MTY1NTIyLDk3NjYwMjYxMiwtMTQ5Mzg4MjAwNy
-wtODY1NjMwNzU4LDE4NDg4NzY0MTYsNDIwNjYyNjc0XX0=
+eyJoaXN0b3J5IjpbLTEyNDI5MjMyNzAsLTE1NDExNjI3MzUsLT
+czMTUzMDM1NCwxMDE1MzIxODc2LDE3MjM4NzQ0NTksLTI5MjY1
+MzY0OSwtMTg4MTA2NDU1OCwxMDg5MTY1NTIyLDk3NjYwMjYxMi
+wtMTQ5Mzg4MjAwNywtODY1NjMwNzU4LDE4NDg4NzY0MTYsNDIw
+NjYyNjc0XX0=
 -->
