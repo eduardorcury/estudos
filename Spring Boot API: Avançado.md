@@ -69,6 +69,35 @@
 	```
 
 ## Cache
+
+### Habilitar Cache
+
+- O cache padrão do Spring Boot não é recomendado para ambientes em produção. Nesses casos, devemos utilizar algum provedor como Redis.
+
+- Para habilitar o Cache na aplicação:
+	1. Incluir a dependência no *pom.xml*
+	2. Anotar com **`@EnableCaching`** a classe principal
+	3. Anotar com **`@Cacheable(value = "idDoCache")`** o método que queremos cachear
+
+### Invalidar Cache
+
+- Em métodos que modificam o estado do banco de dados, devemos invalidar os caches alterados:
+
+	```java 
+		@CacheEvict(value = "listaDeTopicos", allEntries = true) 
+	```
+
+### Recomendações
+
+- Invalidar cache repetidamente pode piorar a performance.
+- Utilizar Cache em tabelas que nunca, ou raramente, serão atualizadas (exemplo: tabela de países).
+
+
+### Perguntar
+
+- Na API do curso de Spring Boot, se eu inserir um tópico com um nome de curso que não existe, ele cadastra com sucesso o tópico e no banco de dados a coluna curso_id fica como null. Eu imagino que isso não seja ideal, qual a melhor forma de corrigir isso? Colocar Not Null nesse campo na tabela
+
+- O cache pode ser 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE2ODIxNDY1MywtMTE2ODkwNDIzM119
+eyJoaXN0b3J5IjpbNDIzNTA1NTMzLC0xMTY4OTA0MjMzXX0=
 -->
