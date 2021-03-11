@@ -290,15 +290,14 @@ public void configure(WebSecurity web) throws Exception {
 	  private TokenService tokenService;  
 	  
 	  @PostMapping  
-	  public ResponseEntity<?> autenticar(@RequestBody @Valid LoginForm form) {  
+	  public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form) {  
 	  
 	     UsernamePasswordAuthenticationToken dadosLogin = form.converter();  
 	  
 		 try {  
 			  Authentication authentication = authenticationManager.authenticate(dadosLogin);  
 			  String token = tokenService.gerarToken(authentication);  
-			  System.out.println(token);  
-			  return ResponseEntity.ok().build();  
+			  return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 		  } catch (AuthenticationException exception) {  
 		      return ResponseEntity.badRequest().build();  
 		  }  
@@ -362,7 +361,253 @@ public void configure(WebSecurity web) throws Exception {
 		   secret: jwt-secret  
 		   expiration: 86400000
 	```
+
+4. Após a geração do token, ele deve ser enviado no corpo da resposta para o cliente. O cliente usará então esse mesmo token para as próximas requisições. Aqui, criamos um novo DTO representando um token, com os atributos token em si e o tipo da autenticação (nesse caso, **`Bearer`**).
+
+	```java
+	return ResponseEntity.ok(new TokenDto(token, "Bearer"));
+	```
+
+### Recebendo e validando o token
+
+- O token é recebido através de um filtro de requisições, sendo esse uma classe que estende `OncePerRequestFilter`. Primeiro, temos que indicar o uso desse filtro na configuração:
+
+	```java
+	@Override  
+	protected void configure(HttpSecurity http) throws Exception {  
+	    http.authorizeRequests()  
+	             //... 
+	            .and().addFilterBefore(new AuntenticacaoViaTokenFilter(tokenService),
+	             				UsernamePasswordAuthenticationFilter.class);  
+	}
+	```
+- O filtro será responsável por receber e validar o token.
+
+1. Recebendo o token através do *header* de **Authorization**:
+
+	```java
+	private String recuperarToken(HttpServletRequest request) {  
+	  
+	    String token = request.getHeader("Authorization");  
+	    if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {  
+	        return null;  
+	    }  
+	    return token.substring(7);  
+	}
+	```
 	
+2. Validando o token com um método no TokenService:
+
+	```java
+	public boolean isTokenValido(String token) {  
+	  
+	    try {  
+	        Jwts.parser().setSigningKey(secret).parseClaimsJws(token);  
+	        return true;  
+	    } catch (Exception exception) {  
+	        return false;  
+	    }  
+	}
+	```
+
+3. Forçando a autenticação
+
+	3.1.  Pegando o ID do usuário do token
+	
+	```java
+	public Long getIdUsuario(String token) {  
+	  
+	    Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();  
+	    return Long.parseLong(claims.getSubject());  
+	  
+	}
+	```
+
+	3.2. Autenticando o usuário
+
+	```java
+	private void autenticarCliente(String token) {  
+	    Long idUsuario = tokenService.getIdUsuario(token);  
+	    Usuario usuario = usuarioRepository.findById(idUsuario).get();  
+	    UsernamePasswordAuthenticationToken authentication =  
+	         new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());  
+	    SecurityContextHolder.getContext().setAuthentication(authentication);  
+	}
+	```
+
+### Classes completas
+
+1. SecurityConfig **(Configuração)**
+
+```java
+@EnableWebSecurity  
+@Configuration  
+public class SecurityConfig extends WebSecurityConfigurerAdapter {  
+  
+    @Autowired  
+    private AutenticacaoService autenticacaoService;  
+  
+    @Autowired  
+    private TokenService tokenService;  
+  
+    @Autowired  
+    private UsuarioRepository usuarioRepository;  
+  
+    @Override  
+    @Bean  
+    protected AuthenticationManager authenticationManager() throws Exception {  
+        return super.authenticationManager();  
+    }  
+  
+    @Override  
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {  
+        auth.userDetailsService(autenticacaoService)
+           .passwordEncoder(new BCryptPasswordEncoder());  
+    }  
+  
+    @Override  
+    protected void configure(HttpSecurity http) throws Exception {  
+        http.authorizeRequests()  
+                .antMatchers(HttpMethod.GET,"/topicos").permitAll()  
+                .antMatchers(HttpMethod.GET, "/topicos/*").permitAll()  
+                .antMatchers(HttpMethod.POST, "/auth").permitAll()  
+                .anyRequest().authenticated()  
+                .and().csrf().disable()  
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)  
+                .and()
+                .addFilterBefore(
+                    new AuntenticacaoViaTokenFilter(tokenService, usuarioRepository), 
+                    UsernamePasswordAuthenticationFilter.class
+                );  
+    }  
+  
+    @Override  
+    public void configure(WebSecurity web) throws Exception { }
+```
+
+2. AuthenticationController **(Controller)**
+
+```java
+@RestController  
+@RequestMapping("/auth")  
+public class AutenticacaoController {  
+  
+    @Autowired  
+    private AuthenticationManager authenticationManager;  
+  
+    @Autowired  
+    private TokenService tokenService;  
+  
+    @PostMapping  
+    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form) {  
+  
+        UsernamePasswordAuthenticationToken dadosLogin = form.converter();  
+  
+        try {  
+            Authentication authentication = authenticationManager.authenticate(dadosLogin);  
+            String token = tokenService.gerarToken(authentication);  
+            return ResponseEntity.ok(new TokenDto(token, "Bearer"));  
+        } catch (AuthenticationException exception) {  
+            return ResponseEntity.badRequest().build();  
+        }  
+    }  
+}
+```
+
+3. TokenService **(Serviço)**
+
+```java
+@Service  
+public class TokenService {  
+  
+    @Value("${forum.jwt.expiration}")  
+    private String expiration;  
+  
+    @Value("${forum.jwt.secret}")  
+    private String secret;  
+  
+    public String gerarToken(Authentication authentication) {  
+  
+        Usuario logado = (Usuario) authentication.getPrincipal();  
+        Date hoje = new Date();  
+	    Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));  
+  
+	    return Jwts.builder()  
+                    .setIssuer("API do forum da Alura")  
+                    .setSubject(logado.getId().toString())  
+                    .setIssuedAt(hoje)  
+                    .setExpiration(dataExpiracao)  
+                    .signWith(SignatureAlgorithm.HS256, secret)  
+                    .compact();  
+	 }  
+  
+    public boolean isTokenValido(String token) {  
+  
+        try {  
+            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);  
+            return true;  
+		} catch (Exception exception) {  
+            return false;  
+	    }  
+     }  
+  
+    public Long getIdUsuario(String token) {  
+        Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();  
+		return Long.parseLong(claims.getSubject()); 
+    }  
+}
+```
+
+4. AuntenticacaoViaTokenFilter **(Filtro)**
+
+```java
+public class AuntenticacaoViaTokenFilter extends OncePerRequestFilter {  
+  
+    private TokenService tokenService;  
+    private UsuarioRepository usuarioRepository;  
+  
+    public AuntenticacaoViaTokenFilter(TokenService tokenService, 
+                                       UsuarioRepository usuarioRepository) {  
+        this.tokenService = tokenService;  
+	    this.usuarioRepository = usuarioRepository;  
+	}  
+  
+    @Override  
+    protected void doFilterInternal(HttpServletRequest request,  
+								    HttpServletResponse response,  
+								    FilterChain filterChain)  
+	            throws ServletException, IOException {  
+  
+        String token = recuperarToken(request);  
+	    boolean valido = tokenService.isTokenValido(token);  
+  
+	    if (valido) {  
+            autenticarCliente(token);  
+	    }  
+        filterChain.doFilter(request, response);  
+    }  
+  
+    private void autenticarCliente(String token) {  
+        Long idUsuario = tokenService.getIdUsuario(token);  
+        Usuario usuario = usuarioRepository.findById(idUsuario).get();  
+        UsernamePasswordAuthenticationToken authentication =  
+            new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());  
+        SecurityContextHolder.getContext().setAuthentication(authentication);  
+    }  
+  
+    private String recuperarToken(HttpServletRequest request) {  
+  
+        String token = request.getHeader("Authorization");  
+	    if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {  
+            return null;  
+	    }  
+        return token.substring(7); 
+  }  
+}
+```
+
+
+
 
 
 ### Perguntar
@@ -371,6 +616,6 @@ public void configure(WebSecurity web) throws Exception {
 
 - O cache pode ser usado em outras APIs?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAxNzE4NTM4NywxMDY4NDE3MzUwLC0xMT
-Y4OTA0MjMzXX0=
+eyJoaXN0b3J5IjpbLTE4MTE3NjE2MjksMTA2ODQxNzM1MCwtMT
+E2ODkwNDIzM119
 -->
