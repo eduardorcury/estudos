@@ -92,12 +92,129 @@
 - Invalidar cache repetidamente pode piorar a performance.
 - Utilizar Cache em tabelas que nunca, ou raramente, serão atualizadas (exemplo: tabela de países).
 
+## Security
+
+### Habilitar Security
+
+1. Incluir a dependência no *pom.xml*
+2. Criar classe de configuração que estende **`WebSecurityConfigurerAdapter`** e anotar com **`@EnableWebSecurity`** 
+
+	```java
+	@EnableWebSecurity  
+	@Configuration  
+	public class SecurityConfig extends WebSecurityConfigurerAdapter {  
+	}
+	```
+
+### Métodos a serem implementados
+
+```java
+@Override  
+protected void configure(AuthenticationManagerBuilder auth) throws Exception {  
+}  
+ 
+@Override  
+protected void configure(HttpSecurity http) throws Exception {     
+}
+
+@Override  
+public void configure(WebSecurity web) throws Exception {  
+}  
+```
+- Primeiro método: responsável pela **autenticação**.
+- Segundo método: responsável pela **autorização**.
+- Terceiro método: controla recursos estáticos (arquivos javascript, css, etc).
+
+### Controlando o acesso
+
+- O controle do acesso é feito através de `antMatchers` no método de autorização, informando o verbo HTTP e a URL.
+
+	```java
+	@Override  
+	protected void configure(HttpSecurity http) throws Exception {  
+	    http.authorizeRequests()  
+	            .antMatchers(HttpMethod.GET,"/topicos").permitAll()  
+	            .antMatchers(HttpMethod.GET, "/topicos/*").permitAll()  
+	            .anyRequest().authenticated();
+	}
+	```
+
+### Controlando ROLES de usuários
+
+- A classe de domínio que terá as credenciais de login deve implementar a interface `UserDetails`, e sobrescrever todos os métodos dela.
+
+- Além disso, ela deve ter uma Lista de perfis com um relacionamento de muitos para muitos com outra entidade.
+
+	```java
+	@Entity  
+	public class Usuario implements UserDetails {  
+	  
+	  //...campos
+	  
+	  @ManyToMany(fetch = FetchType.EAGER)  
+	  private List<Perfil> perfis = new ArrayList<>();  
+
+	  //...getters/setters
+	  
+	  @Override  
+	  public Collection<? extends GrantedAuthority> getAuthorities() {  
+	      return this.perfis;  
+	  }  
+	  
+	  @Override  
+	  public String getPassword() {  
+	      return this.senha;  
+	  }  
+	  
+	  @Override  
+	  public String getUsername() {  
+	      return this.email;  
+	  }  
+  
+	  @Override  
+	  public boolean isAccountNonExpired() { return true; }  
+	  
+	  @Override  
+	  public boolean isAccountNonLocked() { return true; }  
+  
+	  @Override  
+	  public boolean isCredentialsNonExpired() { return true; }  
+  
+	  @Override  
+	  public boolean isEnabled() { return true; }  
+	}
+	```
+
+- A entidade de Perfil deve implementar a interface de `GrantedAuthority`, e sobrescrever o método `getAuthority` que retornará o nome da ROLE.
+
+	```java
+	@Entity  
+	public class Perfil implements GrantedAuthority {  
+	  
+	 @Id  
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)  
+	 private Long id;  
+	  
+	 private String nome;  
+	  
+	 //...getter/setters
+	  
+	  @Override  
+	  public String getAuthority() {  
+	        return this.nome;  
+	  }  
+	}
+	```
+
+### Autenticação
+
+
 
 ### Perguntar
 
-- Na API do curso de Spring Boot, se eu inserir um tópico com um nome de curso que não existe, ele cadastra com sucesso o tópico e no banco de dados a coluna curso_id fica como null. Eu imagino que isso não seja ideal, qual a melhor forma de corrigir isso? Colocar Not Null nesse campo na tabela
+- Na API do curso de Spring Boot, se eu inserir um tópico com um nome de curso que não existe, ele cadastra com sucesso o tópico e no banco de dados a coluna curso_id fica como null. Eu imagino que isso não seja ideal, qual a melhor forma de corrigir isso? Colocar Not Null nesse campo na tabela ou fazer uma lógica no DTO depois de consultar o repositório de cursos?
 
-- O cache pode ser 
+- O cache pode ser usado em outras APIs?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDIzNTA1NTMzLC0xMTY4OTA0MjMzXX0=
+eyJoaXN0b3J5IjpbNDgyODI2MTk1LC0xMTY4OTA0MjMzXX0=
 -->
