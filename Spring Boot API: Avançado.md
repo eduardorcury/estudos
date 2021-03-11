@@ -243,7 +243,9 @@ public void configure(WebSecurity web) throws Exception {
 	 }
 	```
 
-### Autenticação com JWT (stateless)
+## Autenticação com JWT (stateless)
+
+### Dependência
 
 - Incluir dependência do JWT:
 
@@ -254,6 +256,8 @@ public void configure(WebSecurity web) throws Exception {
 			 <version>0.9.1</version>  
 		</dependency>
 	```
+
+### Desabilitando autenticação por sessão
 
 - Por padrão, o Spring Security usa autenticação com sessão, o que viola os princípios REST Stateless. Para desabilitar isso:
 
@@ -270,7 +274,96 @@ public void configure(WebSecurity web) throws Exception {
 	}
 	```
 
-- Agora, é preciso criar um Controller que receberá as requisições para /auth.
+### Controller de autenticação
+
+- Agora, é preciso criar um Controller que receberá as requisições para /auth. Ele terá um método responsável pela autenticação, que receberá um objeto representando os dados de Login.
+
+	```java
+	@RestController  
+	@RequestMapping("/auth")  
+	public class AutenticacaoController {  
+	  
+	  @Autowired  
+	  private AuthenticationManager authenticationManager;  
+	  
+	  @Autowired  
+	  private TokenService tokenService;  
+	  
+	  @PostMapping  
+	  public ResponseEntity<?> autenticar(@RequestBody @Valid LoginForm form) {  
+	  
+	     UsernamePasswordAuthenticationToken dadosLogin = form.converter();  
+	  
+		 try {  
+			  Authentication authentication = authenticationManager.authenticate(dadosLogin);  
+			  String token = tokenService.gerarToken(authentication);  
+			  System.out.println(token);  
+			  return ResponseEntity.ok().build();  
+		  } catch (AuthenticationException exception) {  
+		      return ResponseEntity.badRequest().build();  
+		  }  
+	  }  
+	}
+	```
+
+1. A classe **`AuthenticationManager`** é responsável por autenticar os dados, retornando um token autenticado ou uma `AuthenticationException` caso as credenciais estejam incorretas.
+
+> Essa classe não é um Bean gerenciado pelo String, então deve ser configurada na classe SecurityConfig.
+
+```java
+	@Override  
+	@Bean  
+	protected AuthenticationManager authenticationManager() throws Exception {  
+	    return super.authenticationManager();  
+	}
+```
+
+
+2. O método `authenticate` requer um objeto **`UsernamePasswordAuthenticationToken`**, que pode ser criado a partir das credenciais:
+
+	```java
+	new UsernamePasswordAuthenticationToken(this.email, this.senha);
+	```
+
+3. Para gerar o token JWT, passamos o objeto `Authentication` para uma classe de serviço criada. Nessa classe, o token é gerado com a classe **`Jwts`**, passando vários parâmetros necessários
+
+	```java
+	@Service  
+	public class TokenService {  
+	  
+	    @Value("${forum.jwt.expiration}")  
+	    private String expiration;  
+	  
+		@Value("${forum.jwt.secret}")  
+	    private String secret;  
+	  
+	    public String gerarToken(Authentication authentication) {  
+	  
+	        Usuario logado = (Usuario) authentication.getPrincipal();  
+	        Date hoje = new Date();  
+	        Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));  
+	  
+	        return Jwts.builder()  
+	                    .setIssuer("API do forum da Alura")  
+	                    .setSubject(logado.getId().toString())  
+	                    .setIssuedAt(hoje)  
+	                    .setExpiration(dataExpiracao)  
+	                    .signWith(SignatureAlgorithm.HS256, secret)  
+	                    .compact();  
+	    }  
+	}
+	```
+	
+	3.1. As propriedades *expiration* e *secret* são setadas no `application.properties`.
+
+	```yaml
+		forum:  
+		jwt:  
+		   secret: jwt-secret  
+		   expiration: 86400000
+	```
+	
+
 
 ### Perguntar
 
@@ -278,5 +371,6 @@ public void configure(WebSecurity web) throws Exception {
 
 - O cache pode ser usado em outras APIs?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA2ODQxNzM1MCwtMTE2ODkwNDIzM119
+eyJoaXN0b3J5IjpbMTAxNzE4NTM4NywxMDY4NDE3MzUwLC0xMT
+Y4OTA0MjMzXX0=
 -->
