@@ -208,7 +208,40 @@ public void configure(WebSecurity web) throws Exception {
 
 ### Autenticação
 
+- No método responsável pela autenticação, usamos o objeto `AuthenticationManagerBuilder` para indicar uma instância da classe que faz a lógica de autenticação.
 
+	```java
+	@Autowired  
+	private AutenticacaoService autenticacaoService;  
+	  
+	@Override  
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {  
+	    auth.userDetailsService(autenticacaoService)
+					    .passwordEncoder(new BCryptPasswordEncoder());  
+	}
+	```
+
+- Essa instância implementa a interface **`UserDetailsService`** e sobrescreve o método `loadUserByUsername`
+
+	```java
+	@Service  
+	public class AutenticacaoService implements UserDetailsService {  
+	  
+	    @Autowired  
+		private UsuarioRepository usuarioRepository;  
+	  
+		@Override  
+	    public UserDetails loadUserByUsername(String username)
+											throws UsernameNotFoundException {  
+	        
+	        Optional<Usuario> usuario = usuarioRepository.findByEmail(username);  
+			if (usuario.isPresent()) {  
+	            return usuario.get();  
+			}  
+	        throw new UsernameNotFoundException("Usuário não encontrado");  
+		}  
+	 }
+	```
 
 ### Perguntar
 
@@ -216,5 +249,5 @@ public void configure(WebSecurity web) throws Exception {
 
 - O cache pode ser usado em outras APIs?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDgyODI2MTk1LC0xMTY4OTA0MjMzXX0=
+eyJoaXN0b3J5IjpbLTg4NjIzODg0NSwtMTE2ODkwNDIzM119
 -->
