@@ -206,7 +206,7 @@ public void configure(WebSecurity web) throws Exception {
 	}
 	```
 
-### Autenticação
+### Autenticação com sessão
 
 - No método responsável pela autenticação, usamos o objeto `AuthenticationManagerBuilder` para indicar uma instância da classe que faz a lógica de autenticação.
 
@@ -243,11 +243,40 @@ public void configure(WebSecurity web) throws Exception {
 	 }
 	```
 
+### Autenticação com JWT (stateless)
+
+- Incluir dependência do JWT:
+
+	```xml
+		<dependency>  
+			 <groupId>io.jsonwebtoken</groupId>  
+			 <artifactId>jjwt</artifactId>  
+			 <version>0.9.1</version>  
+		</dependency>
+	```
+
+- Por padrão, o Spring Security usa autenticação com sessão, o que viola os princípios REST Stateless. Para desabilitar isso:
+
+	```java
+	@Override  
+	protected void configure(HttpSecurity http) throws Exception {  
+	    http.authorizeRequests()  
+	            .antMatchers(HttpMethod.GET,"/topicos").permitAll()  
+	            .antMatchers(HttpMethod.GET, "/topicos/*").permitAll()  
+	            .antMatchers(HttpMethod.POST, "/auth").permitAll()  
+	            .anyRequest().authenticated()  
+	            .and().csrf().disable()  
+	            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);  
+	}
+	```
+
+- Agora, é preciso criar um Controller que receberá as requisições para /auth.
+
 ### Perguntar
 
 - Na API do curso de Spring Boot, se eu inserir um tópico com um nome de curso que não existe, ele cadastra com sucesso o tópico e no banco de dados a coluna curso_id fica como null. Eu imagino que isso não seja ideal, qual a melhor forma de corrigir isso? Colocar Not Null nesse campo na tabela ou fazer uma lógica no DTO depois de consultar o repositório de cursos?
 
 - O cache pode ser usado em outras APIs?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg4NjIzODg0NSwtMTE2ODkwNDIzM119
+eyJoaXN0b3J5IjpbMTA2ODQxNzM1MCwtMTE2ODkwNDIzM119
 -->
