@@ -606,9 +606,101 @@ public class AuntenticacaoViaTokenFilter extends OncePerRequestFilter {
 }
 ```
 
+## Monitoramento com Spring Boot Actuator
 
+- Propriedades:
 
+	```yaml
+	management:  
+	  endpoint:  
+	    health:  
+	      show-details: always  
+	    web:  
+	      exposure:  
+	        include: "*"
+	  
+	info:  
+	  app:  
+	    name: @project.name@  
+	    version: @project.version@
+	```
 
+	```properties
+	management.endpoint.health.show-details=always
+	management.endpoints.web.exposure.include=*
+	info.app.name=@project.name@
+	info.app.description=@project.description@
+	info.app.version=@project.version@
+	info.app.encoding=@project.build.sourceEncoding@
+	info.app.java.version=@java.version@
+	```
+
+## Documentação com Swagger
+
+1. Dependências
+
+	```xml
+	<dependency>  
+		 <groupId>io.springfox</groupId>  
+		 <artifactId>springfox-swagger2</artifactId>  
+		 <version>2.9.2</version>  
+	</dependency>  
+	<dependency>  
+		 <groupId>io.springfox</groupId>  
+		 <artifactId>springfox-swagger-ui</artifactId>  
+		 <version>2.9.2</version>  
+	</dependency>
+	```
+
+2. Anotação na classe principal
+
+	```java
+	@EnableSwagger2  
+	public class ForumApplication {  
+	  
+		   public static void main(String[] args) {  
+		      SpringApplication.run(ForumApplication.class, args);  
+		  }  
+	}
+	```
+
+3. Configuração do Swagger
+
+	```java
+	@Configuration  
+	public class SwaggerConfig {  
+		
+		@Bean
+	    public Docket api() {
+	     
+			return new Docket(DocumentationType.SWAGGER_2)
+	                .select()
+	                .apis(RequestHandlerSelectors.basePackage("br.com.alura.forum"))
+	                .paths(PathSelectors.ant("/**"))
+	                .build()
+	                .ignoredParameterTypes(Usuario.class)
+	                .globalOperationParameters(
+	                        Arrays.asList(
+	                                new ParameterBuilder()
+	                                    .name("Authorization")
+	                                    .description("Header para Token JWT")
+	                                    .modelRef(new ModelRef("string"))
+	                                    .parameterType("header")
+	                                    .required(false)
+	                                    .build()));
+	    }
+	}
+	```
+
+4. Liberando endpoints
+
+	```java
+	@Override  
+	public void configure(WebSecurity web) throws Exception {  
+	    web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", 
+								   "/configuration/**", "/swagger-resources/**");  
+	}
+	```
 
 ### Perguntar
 
@@ -616,6 +708,6 @@ public class AuntenticacaoViaTokenFilter extends OncePerRequestFilter {
 
 - O cache pode ser usado em outras APIs?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MTE3NjE2MjksMTA2ODQxNzM1MCwtMT
+eyJoaXN0b3J5IjpbLTE2OTAzOTMwNDIsMTA2ODQxNzM1MCwtMT
 E2ODkwNDIzM119
 -->
