@@ -388,10 +388,10 @@ public void configure(WebSecurity web) throws Exception {
 	3.1. As propriedades *expiration* e *secret* são setadas no `application.properties`.
 
 	```yaml
-		forum:  
+	forum:  
 		jwt:  
-		   secret: jwt-secret  
-		   expiration: 86400000
+			secret: jwt-secret  
+			expiration: 86400000
 	```
 
 4. Após a geração do token, ele deve ser enviado no corpo da resposta para o cliente. O cliente usará então esse mesmo token para as próximas requisições. Aqui, criamos um novo DTO representando um token, com os atributos token em si e o tipo da autenticação (nesse caso, **`Bearer`**).
@@ -740,6 +740,6 @@ public class AuntenticacaoViaTokenFilter extends OncePerRequestFilter {
 
 - O cache pode ser usado em outras APIs?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgwMDU5NDkyMywtMTY5MDM5MzA0MiwxMD
-Y4NDE3MzUwLC0xMTY4OTA0MjMzXX0=
+eyJoaXN0b3J5IjpbLTExNzc3NjI0MjMsLTgwMDU5NDkyMywtMT
+Y5MDM5MzA0MiwxMDY4NDE3MzUwLC0xMTY4OTA0MjMzXX0=
 -->
