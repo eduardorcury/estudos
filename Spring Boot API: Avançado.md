@@ -75,9 +75,40 @@
 - O cache padrão do Spring Boot não é recomendado para ambientes em produção. Nesses casos, devemos utilizar algum provedor como Redis.
 
 - Para habilitar o Cache na aplicação:
+
 	1. Incluir a dependência no *pom.xml*
+
+	```xml
+	<dependency>  
+		 <groupId>org.springframework.boot</groupId>  
+		 <artifactId>spring-boot-starter-cache</artifactId>  
+	</dependency>
+	```
+
 	2. Anotar com **`@EnableCaching`** a classe principal
+
+	```java
+	@SpringBootApplication  
+	@EnableCaching  
+	public class ForumApplication {  
+	  
+	   public static void main(String[] args) {  
+	      SpringApplication.run(ForumApplication.class, args);  
+	  }  
+	  
+	}
+	```
+
 	3. Anotar com **`@Cacheable(value = "idDoCache")`** o método que queremos cachear
+
+	```java
+		@GetMapping  
+		@Cacheable(value = "listaDeTopicos")  
+		public Page<TopicoDto> lista(@RequestParam(required = false) String nomeCurso) {  
+		
+		    // lógica do método 
+		}
+	```
 
 ### Invalidar Cache
 
@@ -121,6 +152,7 @@ protected void configure(HttpSecurity http) throws Exception {
 public void configure(WebSecurity web) throws Exception {  
 }  
 ```
+
 - Primeiro método: responsável pela **autenticação**.
 - Segundo método: responsável pela **autorização**.
 - Terceiro método: controla recursos estáticos (arquivos javascript, css, etc).
@@ -708,6 +740,6 @@ public class AuntenticacaoViaTokenFilter extends OncePerRequestFilter {
 
 - O cache pode ser usado em outras APIs?
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2OTAzOTMwNDIsMTA2ODQxNzM1MCwtMT
-E2ODkwNDIzM119
+eyJoaXN0b3J5IjpbLTgwMDU5NDkyMywtMTY5MDM5MzA0MiwxMD
+Y4NDE3MzUwLC0xMTY4OTA0MjMzXX0=
 -->
