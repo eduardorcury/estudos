@@ -189,6 +189,36 @@
 |--|--|
 | Sabor da Montanha - 700 ml - Uva |  7194 |
 
+7. Quantas vezes cada cliente comprou o produto Sabor da Montanha - 700 ml - Uva?
+
+	```sql
+	SELECT CLI.nome, COUNT(*) AS total FROM tabela_de_clientes CLI
+		JOIN notas_fiscais FIS ON CLI.cpf = FIS.cpf
+	    JOIN itens_notas_fiscais ITENS ON ITENS.numero = FIS.numero
+	    WHERE ITENS.codigo_do_produto = 
+			(SELECT codigo_do_produto FROM tabela_de_produtos
+					WHERE nome_do_produto = 'Sabor da Montanha - 700 ml - Uva')
+		GROUP BY CLI.nome
+	    ORDER BY total;
+	```
+
+| nome                | total |
+|--|--|
+| Carlos Eduardo      |   476 |
+| Walber Lontra       |   491 |
+| Valdeci da Silva    |   497 |
+| Abel Silva          |   500 |
+| Érica Carvalho      |   502 |
+| Gabriel Araujo      |   503 |
+| Petra Oliveira      |   505 |
+| César Teixeira      |   509 |
+| Marcos Nougeuira    |   512 |
+| Eduardo Jorge       |   516 |
+| Edson Meilelles     |   527 |
+| Fernando Cavalcante |   544 |
+| Marcelo Mattos      |   552 |
+| Paulo César Mattos  |   560 |
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM1OTgwMDYxMSwxMTQ4MjYxODc3XX0=
+eyJoaXN0b3J5IjpbLTE3Mzc0MTg4OTQsMTE0ODI2MTg3N119
 -->
