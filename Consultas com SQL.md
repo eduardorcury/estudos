@@ -1,4 +1,3 @@
-
 # Consultas com SQL
 
 ## DATABASE sucos_vendas
@@ -66,7 +65,7 @@
 
 1. Quantas compras foram feitas por cada cliente?
 
-	```SQL
+	```sql
 	SELECT CLI.nome, COUNT(*) AS total FROM tabela_de_clientes CLI 
 		JOIN notas_fiscais FIS ON CLI.cpf = FIS.CPF 
 		GROUP BY CLI.cpf
@@ -84,7 +83,7 @@
 
 2. Quantas compras foram feitas pela Érica Carvalho?
 
-	```SQL
+	```sql
 	SELECT CLI.nome, COUNT(*) AS total FROM tabela_de_clientes CLI 
 		JOIN notas_fiscais FIS ON CLI.cpf = FIS.CPF 
 		GROUP BY CLI.cpf
@@ -97,7 +96,7 @@
 
 3. Quantas vendas foram feitas por cada vendedor?
 
-	```SQL
+	```sql
 	SELECT VEN.matricula, VEN.nome, COUNT(*) AS total FROM tabela_de_vendedores VEN 
 		JOIN notas_fiscais FIS ON VEN.matricula = FIS.matricula 
 		GROUP BY VEN.matricula 
@@ -112,7 +111,7 @@
 
 - Um vendedor não vendeu nada. Para mostrar ele na query, usamos **LEFT JOIN**:
 
-	```SQL
+	```sql
 	SELECT VEN.matricula, VEN.nome, COUNT(*) AS total FROM tabela_de_vendedores VEN 
 		LEFT JOIN notas_fiscais FIS ON VEN.matricula = FIS.matricula 
 		GROUP BY VEN.matricula 
@@ -128,7 +127,7 @@
 
 - Por alguma razão isso mostra 1, ao invés de 0. Para mostrar 0:
 
-	```SQL
+	```sql
 	SELECT VEN.matricula, VEN.nome, COUNT(FIS.numero) AS total FROM tabela_de_vendedores VEN 
 		LEFT JOIN notas_fiscais FIS ON VEN.matricula = FIS.matricula 
 		GROUP BY VEN.matricula 
@@ -145,7 +144,7 @@
 
 4. Quais vendedores venderam para Érica Carvalho?
 
-	```SQL
+	```sql
 	SELECT VEN.matricula, VEN.nome FROM tabela_de_vendedores VEN 
 			JOIN notas_fiscais FIS ON VEN.matricula = FIS.matricula
 	        WHERE FIS.cpf = 
@@ -161,7 +160,7 @@
 
 5. Quantas vezes cada produto foi vendido?
 
-	```SQL
+	```sql
 	SELECT PROD.nome_do_produto, COUNT(*) as TOTAL FROM tabela_de_produtos PROD 
 		JOIN itens_notas_fiscais ITENS 
 		ON PROD.codigo_do_produto = ITENS.codigo_do_produto 
@@ -179,7 +178,7 @@
 
 6. Quantas vezes o produto **Sabor da Montanha - 700 ml - Uva** foi vendido?
 
-	```SQL
+	```sql
 	SELECT PROD.nome_do_produto, COUNT(*) as TOTAL FROM tabela_de_produtos PROD 
 		JOIN itens_notas_fiscais ITENS ON PROD.codigo_do_produto = ITENS.codigo_do_produto
 		GROUP BY PROD.codigo_do_produto 
@@ -191,5 +190,5 @@
 | Sabor da Montanha - 700 ml - Uva |  7194 |
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE0ODI2MTg3N119
+eyJoaXN0b3J5IjpbMTM1OTgwMDYxMSwxMTQ4MjYxODc3XX0=
 -->
