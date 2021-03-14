@@ -219,6 +219,98 @@
 | Marcelo Mattos      |   552 |
 | Paulo César Mattos  |   560 |
 
+8. Qual foi a quantidade comprada por cada cliente por mês?
+
+- A tabela de notas fiscais tem o CPF dos clientes associados a uma nota fiscal. Os itens e quantidades em cada nota fiscal estão na tabela **itens notas fiscais**. Assim, devemos fazer um JOIN entre as tabelas de notas fiscais e itens notas fiscais no campo comum (número).
+- Como queremos saber a soma de quantidade de itens por mês, devemos agrupar os dados com uma combinação de **CPF + MÊS**. 
+
+	```sql
+	SELECT FIS.cpf, DATE_FORMAT(FIS.data_venda, '%Y-%m') AS 'MES_ANO', 
+		SUM(ITENS.quantidade) AS 'QUANTIDADE_VENDAS' FROM notas_fiscais FIS 
+		INNER JOIN itens_notas_fiscais ITENS 
+	    ON FIS.numero = ITENS.numero
+	    GROUP BY FIS.cpf, DATE_FORMAT(FIS.data_venda, '%Y-%m') LIMIT 5;
+	```
+
+| cpf         | MES_ANO | QUANTIDADE_VENDAS |
+|--|--|--|
+| 7771579779  | 2015-01 |             24879 |
+| 50534475787 | 2015-01 |             23176 |
+| 8502682733  | 2015-01 |             21986 |
+| 5840119709  | 2015-01 |             23106 |
+| 1471156710  | 2015-01 |             24316 |
+
+
+9. Diferenciar, para cada cliente, as compras válidas e inválidas. Cada cliente tem uma coluna volume de compra que determina a quantidade limite de compras **por mês**.
+
+- Pela pergunta anterior temos a quantidade de compras de cada cliente por mês. Devemos então comparar com o volume de compra da tabela de clientes. Ou seja, com o SELECT anterior, fazemos um JOIN com a tabela de clientes usando o grupo comum CPF. 
+- Como temos mais um campo comum de agrupamento (nome), acrescentamos no GROUP BY.
+
+	```sql
+	SELECT FIS.cpf, CLI.nome, DATE_FORMAT(FIS.data_venda, '%Y-%m') AS 'MES_ANO', 
+		SUM(ITENS.quantidade) AS 'QUANTIDADE_VENDAS',
+	    CLI.volume_de_compra AS 'QUANTIDADE_LIMITE'
+	    FROM notas_fiscais FIS 
+		INNER JOIN itens_notas_fiscais ITENS 
+	    ON FIS.numero = ITENS.numero
+	    INNER JOIN tabela_de_clientes CLI 
+	    ON FIS.cpf = CLI.cpf
+	    GROUP BY FIS.cpf, CLI.nome, DATE_FORMAT(FIS.data_venda, '%Y-%m')
+	    LIMIT 5;
+	```
+
+| cpf        | nome            | MES_ANO | QUANTIDADE_VENDAS | QUANTIDADE_LIMITE |
+|--|--|--|--|--|
+| 1471156710 | Érica Carvalho  | 2015-01 |             24316 |             24500 |
+| 1471156710 | Érica Carvalho  | 2015-02 |             22073 |             24500 |
+| 1471156710 | Érica Carvalho  | 2015-03 |             22057 |             24500 |
+| 1471156710 | Érica Carvalho  | 2015-04 |             19859 |             24500 |
+| 1471156710 | Érica Carvalho  | 2015-05 |             26385 |             24500 |
+
+
+- Para definir a compra como válida ou inválida, usamos um **CASE**. O CASE funciona como um campo com a seguinte sintaxe:
+
+	```sql
+	CASE WHEN (condição) THEN (valor nessa condição) 
+		ELSE (valor caso contrário) END AS (alias obrigatório)
+	```
+
+- Com os campos que queremos e o campo gerado do CASE mostrado, fazemos um SELECT dentro de SELECT com a tabela anterior. O SELECT interior deve estar em parênteses e usamos um alias X para ele:
+
+	```sql
+	SELECT X.cpf, X.nome, X.mes_ano, X.quantidade_vendas, X.quantidade_limite,
+		CASE WHEN (X.quantidade_limite - X.quantidade_vendas) < 0 THEN 'INVÁLIDA'
+		ELSE 'VÁLIDA' END AS STATUS_VENDA
+		FROM (
+			SELECT FIS.cpf, CLI.nome, DATE_FORMAT(FIS.data_venda, '%Y-%m') AS 'MES_ANO', 
+				SUM(ITENS.quantidade) AS 'QUANTIDADE_VENDAS',
+				CLI.volume_de_compra AS 'QUANTIDADE_LIMITE'
+				FROM notas_fiscais FIS 
+				INNER JOIN itens_notas_fiscais ITENS 
+				ON FIS.numero = ITENS.numero
+				INNER JOIN tabela_de_clientes CLI 
+				ON FIS.cpf = CLI.cpf
+				GROUP BY FIS.cpf, CLI.nome, DATE_FORMAT(FIS.data_venda, '%Y-%m')
+		) AS X
+		LIMIT 10;
+	```
+
+| cpf        | nome| mes_ano | quantidade_vendas | quantidade_limite | STATUS_VENDA |
+|--|--|--|--|--|--|
+| 1471156710 | Érica Carvalho  | 2015-01 |24316 |             24500 | VÁLIDA       |
+| 1471156710 | Érica Carvalho  | 2015-02 |22073 |             24500 | VÁLIDA       |
+| 1471156710 | Érica Carvalho  | 2015-03 |22057 |             24500 | VÁLIDA       |
+| 1471156710 | Érica Carvalho  | 2015-04 |19859 |             24500 | VÁLIDA       |
+| 1471156710 | Érica Carvalho  | 2015-05 |26385 |             24500 | INVÁLIDA     |
+| 1471156710 | Érica Carvalho  | 2015-06 |18712 |             24500 | VÁLIDA       |
+| 1471156710 | Érica Carvalho  | 2015-07 |19849 |             24500 | VÁLIDA       |
+| 1471156710 | Érica Carvalho  | 2015-08 |24926 |             24500 | INVÁLIDA     |
+| 1471156710 | Érica Carvalho  | 2015-09 |23323 |             24500 | VÁLIDA       |
+| 1471156710 | Érica Carvalho  | 2015-10 |21002 |             24500 | VÁLIDA       |
+
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3Mzc0MTg4OTQsMTE0ODI2MTg3N119
+eyJoaXN0b3J5IjpbODUxMjczMTAyLC0xNzM3NDE4ODk0LDExND
+gyNjE4NzddfQ==
 -->
