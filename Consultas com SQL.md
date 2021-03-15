@@ -4,7 +4,7 @@
 
 ### Tabelas
 
-1. Tabela de clientes
+**1. Tabela de clientes**
 
 | CPF | NOME| ENDERECO_1| DATA_DE_NASCIMENTO| IDADE| SEXO |VOLUME_DE_COMPRA|
 |--|--|--|--|--|--|--|
@@ -14,7 +14,7 @@
 | 3623344710 | Marcos Nougeuira| Av. Pastor Martin Luther | 1995-01-13 | 23 | M| 22000 |
 | 492472718   | Eduardo Jorge| R. Volta Grande   | 1994-07-19 |    23 | M| 9500 |
 
-2. Tabela de vendedores
+**2. Tabela de vendedores**
 
 | MATRICULA | NOME  | PERCENTUAL_COMISSAO | DATA_ADMISSAO | DE_FERIAS | BAIRRO      |
 |--|--|--|--|--|--|
@@ -23,7 +23,7 @@
 | 00237     | Roberta Martins       |0.11 | 2017-03-18    | 0x01| Copacabana  |
 | 00238     | Pericles Alves        |0.11 | 2016-08-21    | 0x00| Santo Amaro |
 
-3. Tabela de produtos
+**3. Tabela de produtos**
 
 | CODIGO_DO_PRODUTO | NOME_DO_PRODUTO | EMBALAGEM | TAMANHO| SABOR| PRECO_DE_LISTA |
 |--|--|--|--|--|--|
@@ -33,7 +33,7 @@
 | 1004327| Videira do Campo - 1,5 Litros - Melância   | PET| 1,5 Litros | Melância|19.51 |
 | 1013793| Videira do Campo - 2 Litros - Cereja/Maça  | PET| 2 Litros   | Cereja/Maça|24.01 |
 
-4. Tabela de notas fiscais
+**4. Tabela de notas fiscais**
 
 | CPF         | MATRICULA | DATA_VENDA | NUMERO | IMPOSTO |
 |--|--|--|--|--|
@@ -43,7 +43,7 @@
 | 5840119709  | 00235     | 2015-01-01 |    103 |    0.12 |
 | 1471156710  | 00235     | 2015-01-01 |    104 |    0.12 |
 
-5. Tabela itens notas fiscais
+**5. Tabela itens notas fiscais**
 
 | NUMERO | CODIGO_DO_PRODUTO | QUANTIDADE | PRECO  |
 |--|--|--|--|
@@ -63,9 +63,11 @@
 
 ### Queries
 
-1. Quantas compras foram feitas por cada cliente?
+**1. Quantas compras foram feitas por cada cliente?**
 
 - Devemos contar quantas notas fiscais cada cliente tem. Ou seja, fazemos um JOIN com a tabela de cliente e a tabela de notas fiscais usando o campo comum (CPF) e agrupamos usando o CPF também.
+
+	*Resposta*
 
 	```sql
 	SELECT CLI.nome, COUNT(*) AS total FROM tabela_de_clientes CLI 
@@ -73,6 +75,8 @@
 		GROUP BY CLI.cpf
 		ORDER BY total;
 	```
+
+	*Resultado*
 
 | nome                | total |
 |--|--|
@@ -83,9 +87,11 @@
 | Fernando Cavalcante |  6240 |
 
 
-2. Quantas compras foram feitas pela Érica Carvalho?
+**2. Quantas compras foram feitas pela Érica Carvalho?**
 
 - Semelhante à anterior, mas agora usamos o nome como uma condição de filtro, usando a cláusula HAVING.
+
+	*Resposta*
 
 	```sql
 	SELECT CLI.nome, COUNT(*) AS total FROM tabela_de_clientes CLI 
@@ -94,11 +100,13 @@
 		HAVING CLI.nome='Érica Carvalho';
 	```
 
+	*Resultado*
+
 | nome            | total |
 |--|--|
 | Érica Carvalho  |  6310 |
 
-3. Quantas vendas foram feitas por cada vendedor?
+**3. Quantas vendas foram feitas por cada vendedor?**
 
 	```sql
 	SELECT VEN.matricula, VEN.nome, COUNT(*) AS total FROM tabela_de_vendedores VEN 
@@ -131,12 +139,16 @@
 
 - Por alguma razão isso mostra 1, ao invés de 0. Para mostrar 0:
 
+	*Resposta*
+
 	```sql
 	SELECT VEN.matricula, VEN.nome, COUNT(FIS.numero) AS total FROM tabela_de_vendedores VEN 
 		LEFT JOIN notas_fiscais FIS ON VEN.matricula = FIS.matricula 
 		GROUP BY VEN.matricula 
 		ORDER BY total;
 	```
+	
+	*Resultado*
 
 | matricula | nome                  | total |
 |--|--|--|
@@ -146,11 +158,13 @@
 | 00235     | Márcio Almeida Silva  | 29389 |
 
 
-4. Quais vendedores venderam para Érica Carvalho?
+**4. Quais vendedores venderam para Érica Carvalho?**
 
 - Os vendedores e notas fiscais estão em tabelas diferentes, logo fazemos um JOIN entre essas tabelas no campo comum (matrícula).
 - Queremos as notas fiscais associada a um nome específico. Filtramos com WHERE e fazemos um SELECT interior para encontrar o CPF desse nome.
 - Por fim, agrupamos usando a matrícula do vendedor.
+
+	*Resposta*
 
 	```sql
 	SELECT VEN.matricula, VEN.nome FROM tabela_de_vendedores VEN 
@@ -159,6 +173,8 @@
 				(SELECT cpf FROM tabela_de_clientes WHERE nome = 'Érica carvalho')
 			GROUP BY VEN.matricula;
 	```
+
+	*Resultado*
 	
 | matricula | nome                  |
 |--|--|
@@ -166,10 +182,12 @@
 | 00236     | Cláudia Morais        |
 | 00237     | Roberta Martins       |
 
-5. Quantas vezes cada produto foi vendido?
+**5. Quantas vezes cada produto foi vendido?**
 
 - Precisamos fazer um JOIN entre a tabela de produtos e a tabela de itens notas fiscais, que tem o produto e a quantidade vendida em cada nota fiscal.
 - Agrupamos por código de produto e contamos quantas vezes cada produto aparece na tabela.
+
+	*Resposta*
 
 	```sql
 	SELECT PROD.nome_do_produto, COUNT(*) as TOTAL FROM tabela_de_produtos PROD 
@@ -179,6 +197,8 @@
 		ORDER BY TOTAL;
 	```
 
+	*Resultado*
+
 | nome_do_produto                            | TOTAL |
 |--|--|
 | Festival de Sabores - 1,5 Litros - Açai    |  6893 |
@@ -187,9 +207,11 @@
 | Videira do Campo - 700 ml - Cereja/Maça    |  7018 |
 | Linha Citros - 700 ml - Lima/Limão         |  7043 |
 
-6. Quantas vezes o produto **Sabor da Montanha - 700 ml - Uva** foi vendido?
+**6. Quantas vezes o produto **Sabor da Montanha - 700 ml - Uva** foi vendido?**
 
 - Semelhante à anterior, mas agora usamos o nome como uma condição de filtro, usando a cláusula HAVING.
+
+	*Resposta*
 
 	```sql
 	SELECT PROD.nome_do_produto, COUNT(*) as TOTAL FROM tabela_de_produtos PROD 
@@ -199,15 +221,19 @@
 		HAVING PROD.nome_do_produto = 'Sabor da Montanha - 700 ml - Uva';
 	```
 
+	*Resultado*
+
 | nome_do_produto                  | TOTAL |
 |--|--|
 | Sabor da Montanha - 700 ml - Uva |  7194 |
 
-7. Quantas vezes cada cliente comprou o produto Sabor da Montanha - 700 ml - Uva?
+**7. Quantas vezes cada cliente comprou o produto Sabor da Montanha - 700 ml - Uva?**
 
 - Temos três tabelas com os dados necessários: tabela de clientes, tabela de notas fiscais (associando o cliente a cada compra) e tabela de itens notas fiscais (com os dados do produto comprado).
 - Primeiro fazemos um JOIN com as tabelas de cliente e notas fiscais, no campo CPF. Com a tabela de resultado, fazemos outro JOIN com a tabela de itens notas fiscais no campo comum (número).
 - Como queremos somente um produto específico, usamos WHERE para filtrar baseado no código do produto. Para encontrar esse código, fazemos outro SELECT na tabela de produtos filtrando pelo nome desejado, o que retorna o código do produto.
+
+	*Resposta*
 
 	```sql
 	SELECT CLI.nome, COUNT(*) AS total FROM tabela_de_clientes CLI
@@ -219,6 +245,8 @@
 		GROUP BY CLI.nome
 	    ORDER BY total;
 	```
+	
+	*Resultado*
 
 | nome                | total |
 |--|--|
@@ -237,10 +265,12 @@
 | Marcelo Mattos      |   552 |
 | Paulo César Mattos  |   560 |
 
-8. Qual foi a quantidade comprada por cada cliente por mês?
+**8. Qual foi a quantidade comprada por cada cliente por mês?**
 
 - A tabela de notas fiscais tem o CPF dos clientes associados a uma nota fiscal. Os itens e quantidades em cada nota fiscal estão na tabela **itens notas fiscais**. Assim, devemos fazer um JOIN entre as tabelas de notas fiscais e itens notas fiscais no campo comum (número).
 - Como queremos saber a soma de quantidade de itens por mês, devemos agrupar os dados com uma combinação de **CPF + MÊS**. 
+
+	*Resposta*
 
 	```sql
 	SELECT FIS.cpf, DATE_FORMAT(FIS.data_venda, '%Y-%m') AS 'MES_ANO', 
@@ -249,6 +279,7 @@
 	    ON FIS.numero = ITENS.numero
 	    GROUP BY FIS.cpf, DATE_FORMAT(FIS.data_venda, '%Y-%m') LIMIT 5;
 	```
+	*Resultado*
 
 | cpf         | MES_ANO | QUANTIDADE_VENDAS |
 |--|--|--|
@@ -295,6 +326,8 @@
 
 - Com os campos que queremos e o campo gerado do CASE mostrado, fazemos um SELECT dentro de SELECT com a tabela anterior. O SELECT interior deve estar em parênteses e usamos um alias X para ele:
 
+	*Resposta*
+
 	```sql
 	SELECT X.cpf, X.nome, X.mes_ano, X.quantidade_vendas, X.quantidade_limite,
 		CASE WHEN (X.quantidade_limite - X.quantidade_vendas) < 0 THEN 'INVÁLIDA'
@@ -313,6 +346,9 @@
 		LIMIT 10;
 	```
 
+	*Resultado*
+
+
 | cpf        | nome| mes_ano | quantidade_vendas | quantidade_limite | STATUS_VENDA |
 |--|--|--|--|--|--|
 | 1471156710 | Érica Carvalho  | 2015-01 |24316 |             24500 | VÁLIDA       |
@@ -329,6 +365,6 @@
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1Nzk3MDkxNCw4NTEyNzMxMDIsLTE3Mz
+eyJoaXN0b3J5IjpbMTMzOTQ1MDAzOCw4NTEyNzMxMDIsLTE3Mz
 c0MTg4OTQsMTE0ODI2MTg3N119
 -->
