@@ -78,13 +78,13 @@
 
 	*Resultado*
 
-| nome                | total |
-|--|--|
-| Carlos Eduardo      |  6085 |
-| Marcelo Mattos      |  6179 |
-| César Teixeira      |  6226 |
-| Eduardo Jorge       |  6233 |
-| Fernando Cavalcante |  6240 |
+	| nome                | total |
+	|--|--|
+	| Carlos Eduardo      |  6085 |
+	| Marcelo Mattos      |  6179 |
+	| César Teixeira      |  6226 |
+	| Eduardo Jorge       |  6233 |
+	| Fernando Cavalcante |  6240 |
 
 
 **2. Quantas compras foram feitas pela Érica Carvalho?**
@@ -102,11 +102,13 @@
 
 	*Resultado*
 
-| nome            | total |
-|--|--|
-| Érica Carvalho  |  6310 |
+	| nome            | total |
+	|--|--|
+	| Érica Carvalho  |  6310 |
 
 **3. Quantas vendas foram feitas por cada vendedor?**
+
+- Precisamos fazer um JOIN entre as tabelas de notas fiscais e de vendedores no campo matrícula, agrupando por matrícula.
 
 	```sql
 	SELECT VEN.matricula, VEN.nome, COUNT(*) AS total FROM tabela_de_vendedores VEN 
@@ -115,11 +117,11 @@
 		ORDER BY total;
 	```
 
-| matricula | nome                  | total |
-|--|--|--|
-| 00237     | Roberta Martins       | 29113 |
-| 00236     | Cláudia Morais        | 29375 |
-| 00235     | Márcio Almeida Silva  | 29389 |
+	| matricula | nome                  | total |
+	|--|--|--|
+	| 00237     | Roberta Martins       | 29113 |
+	| 00236     | Cláudia Morais        | 29375 |
+	| 00235     | Márcio Almeida Silva  | 29389 |
 
 - Um vendedor não vendeu nada. Para mostrar ele na query, usamos **LEFT JOIN**:
 
@@ -130,12 +132,12 @@
 		ORDER BY total;
 	```
 
-| matricula | nome                  | total |
-|--|--|--|
-| 00238     | Pericles Alves        |     1 |
-| 00237     | Roberta Martins       | 29113 |
-| 00236     | Cláudia Morais        | 29375 |
-| 00235     | Márcio Almeida Silva  | 29389 |
+	| matricula | nome                  | total |
+	|--|--|--|
+	| 00238     | Pericles Alves        |     1 |
+	| 00237     | Roberta Martins       | 29113 |
+	| 00236     | Cláudia Morais        | 29375 |
+	| 00235     | Márcio Almeida Silva  | 29389 |
 
 - Por alguma razão isso mostra 1, ao invés de 0. Para mostrar 0:
 
@@ -150,12 +152,12 @@
 	
 	*Resultado*
 
-| matricula | nome                  | total |
-|--|--|--|
-| 00238     | Pericles Alves        |     0 |
-| 00237     | Roberta Martins       | 29113 |
-| 00236     | Cláudia Morais        | 29375 |
-| 00235     | Márcio Almeida Silva  | 29389 |
+	| matricula | nome                  | total |
+	|--|--|--|
+	| 00238     | Pericles Alves        |     0 |
+	| 00237     | Roberta Martins       | 29113 |
+	| 00236     | Cláudia Morais        | 29375 |
+	| 00235     | Márcio Almeida Silva  | 29389 |
 
 
 **4. Quais vendedores venderam para Érica Carvalho?**
@@ -176,11 +178,11 @@
 
 	*Resultado*
 	
-| matricula | nome                  |
-|--|--|
-| 00235     | Márcio Almeida Silva  |
-| 00236     | Cláudia Morais        |
-| 00237     | Roberta Martins       |
+	| matricula | nome                  |
+	|--|--|
+	| 00235     | Márcio Almeida Silva  |
+	| 00236     | Cláudia Morais        |
+	| 00237     | Roberta Martins       |
 
 **5. Quantas vezes cada produto foi vendido?**
 
@@ -199,13 +201,13 @@
 
 	*Resultado*
 
-| nome_do_produto                            | TOTAL |
-|--|--|
-| Festival de Sabores - 1,5 Litros - Açai    |  6893 |
-| Festival de Sabores - 700 ml - Açai        |  6909 |
-| Videira do Campo - 2 Litros - Cereja/Maça  |  6971 |
-| Videira do Campo - 700 ml - Cereja/Maça    |  7018 |
-| Linha Citros - 700 ml - Lima/Limão         |  7043 |
+	| nome_do_produto                            | TOTAL |
+	|--|--|
+	| Festival de Sabores - 1,5 Litros - Açai    |  6893 |
+	| Festival de Sabores - 700 ml - Açai        |  6909 |
+	| Videira do Campo - 2 Litros - Cereja/Maça  |  6971 |
+	| Videira do Campo - 700 ml - Cereja/Maça    |  7018 |
+	| Linha Citros - 700 ml - Lima/Limão         |  7043 |
 
 **6. Quantas vezes o produto **Sabor da Montanha - 700 ml - Uva** foi vendido?**
 
@@ -223,9 +225,9 @@
 
 	*Resultado*
 
-| nome_do_produto                  | TOTAL |
-|--|--|
-| Sabor da Montanha - 700 ml - Uva |  7194 |
+	| nome_do_produto                  | TOTAL |
+	|--|--|
+	| Sabor da Montanha - 700 ml - Uva |  7194 |
 
 **7. Quantas vezes cada cliente comprou o produto Sabor da Montanha - 700 ml - Uva?**
 
@@ -248,22 +250,22 @@
 	
 	*Resultado*
 
-| nome                | total |
-|--|--|
-| Carlos Eduardo      |   476 |
-| Walber Lontra       |   491 |
-| Valdeci da Silva    |   497 |
-| Abel Silva          |   500 |
-| Érica Carvalho      |   502 |
-| Gabriel Araujo      |   503 |
-| Petra Oliveira      |   505 |
-| César Teixeira      |   509 |
-| Marcos Nougeuira    |   512 |
-| Eduardo Jorge       |   516 |
-| Edson Meilelles     |   527 |
-| Fernando Cavalcante |   544 |
-| Marcelo Mattos      |   552 |
-| Paulo César Mattos  |   560 |
+	| nome                | total |
+	|--|--|
+	| Carlos Eduardo      |   476 |
+	| Walber Lontra       |   491 |
+	| Valdeci da Silva    |   497 |
+	| Abel Silva          |   500 |
+	| Érica Carvalho      |   502 |
+	| Gabriel Araujo      |   503 |
+	| Petra Oliveira      |   505 |
+	| César Teixeira      |   509 |
+	| Marcos Nougeuira    |   512 |
+	| Eduardo Jorge       |   516 |
+	| Edson Meilelles     |   527 |
+	| Fernando Cavalcante |   544 |
+	| Marcelo Mattos      |   552 |
+	| Paulo César Mattos  |   560 |
 
 **8. Qual foi a quantidade comprada por cada cliente por mês?**
 
@@ -281,13 +283,13 @@
 	```
 	*Resultado*
 
-| cpf         | MES_ANO | QUANTIDADE_VENDAS |
-|--|--|--|
-| 7771579779  | 2015-01 |             24879 |
-| 50534475787 | 2015-01 |             23176 |
-| 8502682733  | 2015-01 |             21986 |
-| 5840119709  | 2015-01 |             23106 |
-| 1471156710  | 2015-01 |             24316 |
+	| cpf         | MES_ANO | QUANTIDADE_VENDAS |
+	|--|--|--|
+	| 7771579779  | 2015-01 |             24879 |
+	| 50534475787 | 2015-01 |             23176 |
+	| 8502682733  | 2015-01 |             21986 |
+	| 5840119709  | 2015-01 |             23106 |
+	| 1471156710  | 2015-01 |             24316 |
 
 
 9. Diferenciar, para cada cliente, as compras válidas e inválidas. Cada cliente tem uma coluna volume de compra que determina a quantidade limite de compras **por mês**.
@@ -308,13 +310,13 @@
 	    LIMIT 5;
 	```
 
-| cpf        | nome            | MES_ANO | QUANTIDADE_VENDAS | QUANTIDADE_LIMITE |
-|--|--|--|--|--|
-| 1471156710 | Érica Carvalho  | 2015-01 |             24316 |             24500 |
-| 1471156710 | Érica Carvalho  | 2015-02 |             22073 |             24500 |
-| 1471156710 | Érica Carvalho  | 2015-03 |             22057 |             24500 |
-| 1471156710 | Érica Carvalho  | 2015-04 |             19859 |             24500 |
-| 1471156710 | Érica Carvalho  | 2015-05 |             26385 |             24500 |
+	| cpf        | nome            | MES_ANO | QUANTIDADE_VENDAS | QUANTIDADE_LIMITE |
+	|--|--|--|--|--|
+	| 1471156710 | Érica Carvalho  | 2015-01 |             24316 |             24500 |
+	| 1471156710 | Érica Carvalho  | 2015-02 |             22073 |             24500 |
+	| 1471156710 | Érica Carvalho  | 2015-03 |             22057 |             24500 |
+	| 1471156710 | Érica Carvalho  | 2015-04 |             19859 |             24500 |
+	| 1471156710 | Érica Carvalho  | 2015-05 |             26385 |             24500 |
 
 
 - Para definir a compra como válida ou inválida, usamos um **CASE**. O CASE funciona como um campo com a seguinte sintaxe:
@@ -348,19 +350,18 @@
 
 	*Resultado*
 
-
-| cpf        | nome| mes_ano | quantidade_vendas | quantidade_limite | STATUS_VENDA |
-|--|--|--|--|--|--|
-| 1471156710 | Érica Carvalho  | 2015-01 |24316 |             24500 | VÁLIDA       |
-| 1471156710 | Érica Carvalho  | 2015-02 |22073 |             24500 | VÁLIDA       |
-| 1471156710 | Érica Carvalho  | 2015-03 |22057 |             24500 | VÁLIDA       |
-| 1471156710 | Érica Carvalho  | 2015-04 |19859 |             24500 | VÁLIDA       |
-| 1471156710 | Érica Carvalho  | 2015-05 |26385 |             24500 | INVÁLIDA     |
-| 1471156710 | Érica Carvalho  | 2015-06 |18712 |             24500 | VÁLIDA       |
-| 1471156710 | Érica Carvalho  | 2015-07 |19849 |             24500 | VÁLIDA       |
-| 1471156710 | Érica Carvalho  | 2015-08 |24926 |             24500 | INVÁLIDA     |
-| 1471156710 | Érica Carvalho  | 2015-09 |23323 |             24500 | VÁLIDA       |
-| 1471156710 | Érica Carvalho  | 2015-10 |21002 |             24500 | VÁLIDA       |
+	| cpf        | nome| mes_ano | quantidade_vendas | quantidade_limite | STATUS_VENDA |
+	|--|--|--|--|--|--|
+	| 1471156710 | Érica Carvalho  | 2015-01 |24316 |             24500 | VÁLIDA       |
+	| 1471156710 | Érica Carvalho  | 2015-02 |22073 |             24500 | VÁLIDA       |
+	| 1471156710 | Érica Carvalho  | 2015-03 |22057 |             24500 | VÁLIDA       |
+	| 1471156710 | Érica Carvalho  | 2015-04 |19859 |             24500 | VÁLIDA       |
+	| 1471156710 | Érica Carvalho  | 2015-05 |26385 |             24500 | INVÁLIDA     |
+	| 1471156710 | Érica Carvalho  | 2015-06 |18712 |             24500 | VÁLIDA       |
+	| 1471156710 | Érica Carvalho  | 2015-07 |19849 |             24500 | VÁLIDA       |
+	| 1471156710 | Érica Carvalho  | 2015-08 |24926 |             24500 | INVÁLIDA     |
+	| 1471156710 | Érica Carvalho  | 2015-09 |23323 |             24500 | VÁLIDA       |
+	| 1471156710 | Érica Carvalho  | 2015-10 |21002 |             24500 | VÁLIDA       |
 
 
 
