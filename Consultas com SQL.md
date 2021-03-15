@@ -65,9 +65,11 @@
 
 1. Quantas compras foram feitas por cada cliente?
 
+- Devemos contar quantas notas fiscais cada cliente tem. Ou seja, fazemos um JOIN com a tabela de cliente e a tabela de notas fiscais usando o campo comum (CPF) e agrupamos usando o CPF também.
+
 	```sql
 	SELECT CLI.nome, COUNT(*) AS total FROM tabela_de_clientes CLI 
-		JOIN notas_fiscais FIS ON CLI.cpf = FIS.CPF 
+		INNER JOIN notas_fiscais FIS ON CLI.cpf = FIS.CPF 
 		GROUP BY CLI.cpf
 		ORDER BY total;
 	```
@@ -83,9 +85,11 @@
 
 2. Quantas compras foram feitas pela Érica Carvalho?
 
+- Semelhante à anterior, mas agora usamos o nome como uma condição de filtro, usando a cláusula HAVING.
+
 	```sql
 	SELECT CLI.nome, COUNT(*) AS total FROM tabela_de_clientes CLI 
-		JOIN notas_fiscais FIS ON CLI.cpf = FIS.CPF 
+		INNER JOIN notas_fiscais FIS ON CLI.cpf = FIS.CPF 
 		GROUP BY CLI.cpf
 		HAVING CLI.nome='Érica Carvalho';
 	```
@@ -98,7 +102,7 @@
 
 	```sql
 	SELECT VEN.matricula, VEN.nome, COUNT(*) AS total FROM tabela_de_vendedores VEN 
-		JOIN notas_fiscais FIS ON VEN.matricula = FIS.matricula 
+		INNER JOIN notas_fiscais FIS ON VEN.matricula = FIS.matricula 
 		GROUP BY VEN.matricula 
 		ORDER BY total;
 	```
@@ -144,9 +148,13 @@
 
 4. Quais vendedores venderam para Érica Carvalho?
 
+- Os vendedores e notas fiscais estão em tabelas diferentes, logo fazemos um JOIN entre essas tabelas no campo comum (matrícula).
+- Queremos as notas fiscais associada a um nome específico. Filtramos com WHERE e fazemos um SELECT interior para encontrar o CPF desse nome.
+- Por fim, agrupamos usando a matrícula do vendedor.
+
 	```sql
 	SELECT VEN.matricula, VEN.nome FROM tabela_de_vendedores VEN 
-			JOIN notas_fiscais FIS ON VEN.matricula = FIS.matricula
+			INNER JOIN notas_fiscais FIS ON VEN.matricula = FIS.matricula
 	        WHERE FIS.cpf = 
 				(SELECT cpf FROM tabela_de_clientes WHERE nome = 'Érica carvalho')
 			GROUP BY VEN.matricula;
@@ -160,9 +168,12 @@
 
 5. Quantas vezes cada produto foi vendido?
 
+- Precisamos fazer um JOIN entre a tabela de produtos e a tabela de itens notas fiscais, que tem o produto e a quantidade vendida em cada nota fiscal.
+- Agrupamos por código de produto e contamos quantas vezes cada produto aparece na tabela.
+
 	```sql
 	SELECT PROD.nome_do_produto, COUNT(*) as TOTAL FROM tabela_de_produtos PROD 
-		JOIN itens_notas_fiscais ITENS 
+		INNER JOIN itens_notas_fiscais ITENS 
 		ON PROD.codigo_do_produto = ITENS.codigo_do_produto 
 		GROUP BY PROD.codigo_do_produto 
 		ORDER BY TOTAL;
@@ -178,9 +189,12 @@
 
 6. Quantas vezes o produto **Sabor da Montanha - 700 ml - Uva** foi vendido?
 
+- Semelhante à anterior, mas agora usamos o nome como uma condição de filtro, usando a cláusula HAVING.
+
 	```sql
 	SELECT PROD.nome_do_produto, COUNT(*) as TOTAL FROM tabela_de_produtos PROD 
-		JOIN itens_notas_fiscais ITENS ON PROD.codigo_do_produto = ITENS.codigo_do_produto
+		INNER JOIN itens_notas_fiscais ITENS 
+		ON PROD.codigo_do_produto = ITENS.codigo_do_produto
 		GROUP BY PROD.codigo_do_produto 
 		HAVING PROD.nome_do_produto = 'Sabor da Montanha - 700 ml - Uva';
 	```
@@ -191,10 +205,14 @@
 
 7. Quantas vezes cada cliente comprou o produto Sabor da Montanha - 700 ml - Uva?
 
+- Temos três tabelas com os dados necessários: tabela de clientes, tabela de notas fiscais (associando o cliente a cada compra) e tabela de itens notas fiscais (com os dados do produto comprado).
+- Primeiro fazemos um JOIN com as tabelas de cliente e notas fiscais, no campo CPF. Com a tabela de resultado, fazemos outro JOIN com a tabela de itens notas fiscais no campo comum (número).
+- Como queremos somente um produto específico, usamos WHERE para filtrar baseado no código do produto. Para encontrar esse código, fazemos outro SELECT na tabela de produtos filtrando pelo nome desejado, o que retorna o código do produto.
+
 	```sql
 	SELECT CLI.nome, COUNT(*) AS total FROM tabela_de_clientes CLI
-		JOIN notas_fiscais FIS ON CLI.cpf = FIS.cpf
-	    JOIN itens_notas_fiscais ITENS ON ITENS.numero = FIS.numero
+		INNER JOIN notas_fiscais FIS ON CLI.cpf = FIS.cpf
+	    INNER JOIN itens_notas_fiscais ITENS ON ITENS.numero = FIS.numero
 	    WHERE ITENS.codigo_do_produto = 
 			(SELECT codigo_do_produto FROM tabela_de_produtos
 					WHERE nome_do_produto = 'Sabor da Montanha - 700 ml - Uva')
@@ -311,6 +329,6 @@
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODUxMjczMTAyLC0xNzM3NDE4ODk0LDExND
-gyNjE4NzddfQ==
+eyJoaXN0b3J5IjpbLTg1Nzk3MDkxNCw4NTEyNzMxMDIsLTE3Mz
+c0MTg4OTQsMTE0ODI2MTg3N119
 -->
