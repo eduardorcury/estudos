@@ -75,11 +75,11 @@ Perguntar sobre repository/entityManager
 
 ### Mais sobre specifications:
 
-[https://www.devmedia.com.br/spring-data-e-o-padrao-specification-simplifique-a-construcao-e-o-reuso-de-consultas/38103](devmedia)
+[Artigo devmedia](https://www.devmedia.com.br/spring-data-e-o-padrao-specification-simplifique-a-construcao-e-o-reuso-de-consultas/38103)
 
 > A função de specifications é flexibilizar as consultas ao banco de dados, permitindo que façamos diferentes consultas com diferentes argumentos a partir do mesmo método do repositório.
 
-https://docs.spring.io/spring-data/jpa/docs/2.4.5/reference/html/#specifications (documentação)
+ [Documentação Spring Data JPA](https://docs.spring.io/spring-data/jpa/docs/2.4.5/reference/html/#specifications)
 
 1. Com *specifications*, é possível definir um conjunto de **predicados** relacionados a uma determinada entidade para executar uma gama de consultas com diversas possibilidades, sem a necessidade de escrever a query em si:
 
