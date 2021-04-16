@@ -40,14 +40,20 @@ A arquitetura do Logback é dividida em 3 camadas descritas a seguir: Logger, Ap
 - Trata-se da classe que a nossa aplicação interage/instancia para fazer o Logging.
 
 	```java
-	public class Example { 
-	
-		private static final Logger logger = LoggerFactory.getLogger(Example.class);
-		 
-		public static void main(String[] args) { 
-			logger.info("Example log from {}", Example.class.getSimpleName()); 
-		} 
-		
+	import org.slf4j.Logger;
+	import org.slf4j.LoggerFactory;
+
+	public class Exemplo {
+
+	    private final Logger logger = LoggerFactory.getLogger(Exemplo.class);
+
+	    public void log() {
+	        logger.info("Log de informação");
+	        logger.warn("Log de aviso, algo está errado ou faltando! cuidado!");
+	        logger.error("Log de erro, algo de errado aconteceu!");
+	        logger.debug("Log de depuração, contém informações mais refinadas, que são mais úteis para depurar um aplicativo");
+	        logger.trace("Log de rastreabilidade, contém informações mais refinadas do que o DEBUG");
+	    }
 	}
 	```
 
