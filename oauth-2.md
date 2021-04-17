@@ -1,3 +1,7 @@
+---
+description: Anotações sobre OAuth 2.0
+---
+
 # OAuth 2
 
 OAuth é um protocolo de autorização que permite que um serviço autorize o acesso aos dados do usuário por um software terceiro.
@@ -10,13 +14,13 @@ OAuth é um protocolo de autorização que permite que um serviço autorize o ac
 
 ### Terminologias importantes:
 
-1. Client: a **aplicação que está solicitando os dados**. Nesse caso, o site da Yelp.
-2. Resource Owner: os **dono dos dados** que estão sendo solicitados. Nesse caso, somos nós.
-3. Authorization Server: o serviço que irá realizar a autorização. Nesse caso, uma API da Google \(accounts.google.com\).
-4. Resource Server: a API que contém os dados que o Client quer. Nesse caso, também é uma API da Google \(contacts.google.com\).
-5. Callback URL: a URL que o Authorization Server vai te redirecionar após você confirmar o acesso aos dados.
-6. Access Token: o que a Client recebe após todo o processo. Um token que é passado ao Resource Server para obter os dados.
-7. Scope: as permissões que o Client está solicitando. Nesse caso, a Yelp quer acesso de leitura dos nossos contatos.
+1. _**Client**_**:** a **aplicação que está solicitando os dados**. Nesse caso, o site da Yelp.
+2. _**Resource Owner**_: os **dono dos dados** que estão sendo solicitados. Nesse caso, somos nós.
+3. _**Authorization Server**_: o serviço que irá realizar a autorização. Nesse caso, uma API da Google \(e.g. accounts.google.com\).
+4. _**Resource Server:**_ a API que contém os dados que o Client quer. Nesse caso, é a API de contatos da Google \(e.g. contacts.google.com\).
+5. _**Callback URL:**_ a URL que o _Authorization Server_ vai te redirecionar após você confirmar o acesso aos dados.
+6. _**Access Token:**_ o que a Client recebe após todo o processo. Um token que é passado ao Resource Server para obter os dados.
+7. _**Scope:**_ as permissões que o Client está solicitando. Nesse caso, a Yelp quer acesso de leitura dos nossos contatos.
 
 ### Fluxo:
 
@@ -39,4 +43,20 @@ Para tudo isso funcionar, a Yelp precisa "se cadastrar" no serviço OAuth da Goo
 ## OpenID Connect e para que serve
 
 O OAuth resolve os problemas de **autorização, mas não de autenticação**. Ou seja, o Access Token serve para **autorizar** a Yelp a consultar os nossos contatos, mas a Yelp não conhece dados sobre nós, como o nosso e-mail \(nós não estamos **autenticados**\). Com o OpenID Connect, o Authorization Server também retorna um **Token ID** \(um JWT\), contendo informações do usuário para que a Yelp saiba que somos nós.
+
+## Keycloak
+
+[Documentação](https://www.keycloak.org/docs/latest/server_admin/#overview)
+
+Usado como _Authorization Server._ Trata-se de um outro servidor no sistema, com o propósito de autenticar e autorizar o usuário. Como os usuários são redirecionados do browser ao servidor onde informam suas credencias, o browser não tem conhecimento dessas informações. O _Authorization Server_  retorna um **token** com informações do usuário \(nome, e-mail, etc\), além das suas **permissões**.
+
+
+
+
+
+
+
+
+
+
 

@@ -1,7 +1,6 @@
 # Table of contents
 
 * [Meus estudos](README.md)
-* [Criando código de qualidade](boas-praticas-de-desenvolvimento.md)
 * [OAuth 2](oauth-2.md)
 * [Docker](docker.md)
 * [Consultas com SQL](consultas-com-sql.md)
@@ -19,6 +18,7 @@
 
 ## Boas Práticas
 
+* [Criando código de qualidade](boas-praticas/boas-praticas-de-desenvolvimento.md)
 * [Seja um melhor estudante](boas-praticas/seja-um-melhor-estudante.md)
 * [Princípios SOLID](boas-praticas/solid.md)
 
