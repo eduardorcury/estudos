@@ -1,7 +1,8 @@
 # Table of contents
 
 * [Meus estudos](README.md)
-* [OAuth 2](oauth-2.md)
+* [Segurança: autenticação e autorização](oauth-2.md)
+* [Monitoramento](monitoramento.md)
 * [Docker](docker.md)
 * [Consultas com SQL](consultas-com-sql.md)
 

@@ -149,15 +149,15 @@
 * Usados para persistir os dados, evitando que eles sejam perdidos quando o container morrer. Criar um volume significa criar uma pasta no container que indica que os arquivos dessa pasta não devem ser salvos na camada do container, mas sim no Docker Host.
 * Para criar um volume no container, utilizamos a flag `-v` informando o nome da pasta que guardará os dados:
 
-  ```bash
-    docker run -v "/var/www" ubuntu
-  ```
+```bash
+docker run -v "/var/www" ubuntu
+```
 
 * Podemos especificar onde \(no nosso computador\) esses dados serão salvos:
 
-  ```bash
-     docker run -it -v "C:\Users\eduardo.cury\Desktop:/var/www" ubuntu
-  ```
+```bash
+docker run -it -v "C:\Users\eduardo.cury\Desktop:/var/www" ubuntu
+```
 
 > Os arquivos criados na pasta /var/www do ubuntu serão escritos no Desktop.
 
@@ -172,38 +172,38 @@
 * O comando **`ENTRYPOINT`** informa o comando a ser executado assim que o container for startado. 
 * Para indicar qual porta será exposta pela aplicação, usamos o comando **`EXPOSE`**
 
-  ```text
-   FROM node:latest
-   MAINTAINER Eduardo
-   COPY . /var/www
-   WORKDIR /var/www
-   RUN npm install
-   ENTRYPOINT ["npm", "start"]
-   EXPOSE 3000
-  ```
+```bash
+ FROM node:latest
+ MAINTAINER Eduardo
+ COPY . /var/www
+ WORKDIR /var/www
+ RUN npm install
+ ENTRYPOINT ["npm", "start"]
+ EXPOSE 3000
+```
 
 * Para criar a imagem, executamos o seguinte comando:
 
-  ```bash
-    docker build -f Dockerfile -t eduardo/node .
-  ```
+```bash
+docker build -f Dockerfile -t eduardo/node .
+```
 
-  A flag `-f` indica o nome do arquivo \(se o arquivo se chamar Dockerfile, não preciso informar\) e a flag `-t` indica a tag da imagem. Em seguida informarmos o local do arquivo \(se estiver no _pwd_, colocamos um ponto\).
+A flag `-f` indica o nome do arquivo \(se o arquivo se chamar Dockerfile, não preciso informar\) e a flag `-t` indica a tag da imagem. Em seguida informarmos o local do arquivo \(se estiver no _pwd_, colocamos um ponto\).
 
 ## Comunicação entre contêineres
 
 * Os containeres do Docker ficam em uma rede, e podem se comunicar entre si.
 * A rede padrão criada pelo Docker não permite que os containeres se comuniquem através de seus nomes, apenas através de seus endereços IPs. Para isso, devemos criar uma nova rede:
 
-  ```bash
-    docker network create --driver bridge minha-rede
-  ```
+```bash
+docker network create --driver bridge minha-rede
+```
 
 * Agora, podemos criar contêineres que usam essa rede através da flag `--network`:
 
-  ```bash
-    docker run -it --name meu-container --network minha-rede ubuntu
-  ```
+```bash
+docker run -it --name meu-container --network minha-rede ubuntu
+```
 
 > O comando `hostname -i` mostra o endereço IP do container em que ele está sendo executado.
 
@@ -216,71 +216,71 @@
 * Se o serviço em questão depender de outro container, especificamos em `depends_on`.
 * Além de containers, podemos criar redes. Basta usar `networks`, informar o nome da rede a ser criada e o `driver`.
 
-  ```text
-   version: '3'
-   services:
-       nginx:
-           build:
-               dockerfile: ./docker/nginx.dockerfile
-               context: .
-           image: eduardo/nginx
-           container_name: nginx
-           ports:
-               - "80:80"
-           networks:
-               - production-network
-           depends_on:
-               - "node"
-       mongodb:
-           image: mongo
-           networks:
-               - production-network
-       node:
-           build:
-               dockerfile: ./docker/alura-books.dockerfile
-               context: .
-           image: eduardo/alura-books
-           container_name: alura-books1
-           ports:
-               - "3000"
-           networks:
-               - production-network
-           depends_on:
-               - "mongodb"
-   networks:
-       production-network:
-           driver: bridge
-  ```
+```yaml
+version: '3'
+ services:
+     nginx:
+         build:
+             dockerfile: ./docker/nginx.dockerfile
+             context: .
+         image: eduardo/nginx
+         container_name: nginx
+         ports:
+             - "80:80"
+         networks:
+             - production-network
+         depends_on:
+             - "node"
+     mongodb:
+         image: mongo
+         networks:
+             - production-network
+     node:
+         build:
+             dockerfile: ./docker/alura-books.dockerfile
+             context: .
+         image: eduardo/alura-books
+         container_name: alura-books1
+         ports:
+             - "3000"
+         networks:
+             - production-network
+         depends_on:
+             - "mongodb"
+ networks:
+     production-network:
+         driver: bridge
+```
 
 * Para buildar as imagens a partir do arquivo:
 
-  ```bash
-    docker-compose build
-  ```
+```bash
+docker-compose build
+```
 
 > Esse comando vai apenas criar as imagens.
 
 * Para subir os containers, executamos:
 
-  ```bash
-    docker-compose up
-  ```
+```bash
+docker-compose up
+```
 
-  Em modo detatched:
+Em modo detatched:
 
-  ```bash
-    docker-compose up -d
-  ```
+```bash
+docker-compose up -d
+```
 
-  Também podemos ver os serviços sendo executados:
+Também podemos ver os serviços sendo executados:
 
-  ```bash
-    docker-compose ps
-  ```
+```bash
+docker-compose ps
+```
 
-  Para parar todos os containers \(e deletá-los\):
+Para parar todos os containers \(e deletá-los\):
 
-  ```bash
-    docker-compose down
-  ```
+```bash
+docker-compose down
+```
 
