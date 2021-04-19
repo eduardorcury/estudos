@@ -46,9 +46,37 @@ O OAuth resolve os problemas de **autorização, mas não de autenticação**. O
 
 ## Keycloak
 
+> Sistema externo especializado em lidar com autorização
+
 [Documentação](https://www.keycloak.org/docs/latest/server_admin/#overview)
 
 Usado como _Authorization Server._ Trata-se de um outro servidor no sistema, com o propósito de autenticar e autorizar o usuário. Como os usuários são redirecionados do browser ao servidor onde informam suas credencias, o browser não tem conhecimento dessas informações. O _Authorization Server_  retorna um **token** com informações do usuário \(nome, e-mail, etc\), além das suas **permissões**.
+
+## Definições
+
+### IAM
+
+> **Identity and access management \(IAM\)** is the discipline that enables the right individuals to access the right resources at the right times for the right reasons \([fonte](https://www.gartner.com/en/information-technology/glossary/identity-and-access-management-iam)\).
+
+### **SSO**
+
+**Single Sing On \(SSO\)** é uma ferramenta de autenticação que permite que um usuário se autentique em **múltiplos sistemas de uma organização** com um único login/senha. SSO permite que eu tenha acesso a Google Agenda, Google Meet e GMail me autenticando somente uma vez, mesmo esses sendo sistemas/aplicações completamente distintas. SSO é uma parte de um sistema IAM.
+
+[Artigo sobre SSO](https://www.okta.com/blog/2021/02/single-sign-on-sso/)
+
+> SSO is built on the concept of federated identity, which is the **sharing of identity attributes across trusted but autonomous systems**. When a user is trusted by one system, they are automatically granted access to all others that have established a trusted relationship with it.
+
+### SAML
+
+
+
+### OAuth x SAML x OpenID
+
+Esses três conceitos são diferentes, e usados em situações distintas \([fonte](https://www.okta.com/identity-101/whats-the-difference-between-oauth-openid-connect-and-saml/)\).
+
+* OAuth é um meio de **autorizar** que aplicações terceiras acessem recursos específicos de um sistema. 
+* Como OAuth não lida com autenticação, temos o OpenID para essa tarefa. O OpenID usa tokens JWT para enviar informações sobre o usuário para a aplicação terceira. OAuth e OpenID podem ser \(e geralmente são\) usados em conjunto.
+* SAML está mais relacionado ao SSO. Provê autenticação e autorização de usuários ao sistema.
 
 
 
