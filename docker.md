@@ -284,3 +284,17 @@ Para parar todos os containers \(e deletá-los\):
 docker-compose down
 ```
 
+## Comandos prontos
+
+* Usando container do mysql:
+
+```bash
+docker run -p 3306:3306  --name mysql-container -e MYSQL_ROOT_PASSWORD=password -e MYSQL_USER=eduardo -e MYSQL_PASSWORD=password -d mysql:latest
+```
+
+* Usando mysql do host em um container:
+
+```bash
+docker container run -p 8080:8080 -e DB_NAME=host.docker.internal eduardorcury/proposta:1.0.1 --name proposta
+```
+
