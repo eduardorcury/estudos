@@ -1,5 +1,5 @@
 ---
-description: Contéudo sobre métricas e Prometheus.
+description: Contéudo sobre métricas e tracing.
 ---
 
 # Monitoramento
@@ -16,7 +16,9 @@ O método RED \(Rate, Errors & Duration\) analisa a quantidade de solicitações
 
 > Using these basic metrics most problems that an end user might face with your web app can be captured, such as how many errors there are and how slow their service is \([fonte](https://www.weave.works/docs/cloud/latest/tasks/monitor/best-instrumenting/)\).
 
+{% hint style="info" %}
 Uma das limitações desse método é que ele só pode ser usado em aplicações que lidam com requisições, sendo inadequado em sistemas _batch_ ou de _streaming_.
+{% endhint %}
 
 ### Método USE
 
@@ -85,7 +87,98 @@ scrape_configs:
     - targets: ['localhost:9090']
 ```
 
+### Notação
 
+```text
+<nome da métrica>{<label name>=<label value>, ...}
+```
+
+Ou seja, se quisermos métricas da quantidade de requisições POST ao path "/auth" da nossa API, informamos ao Prometheus:
+
+```text
+api_http_requests_total{method="POST", handler="/messages"}
+```
+
+### Prometheus com Spring Boot Actuator
+
+* Habilitar o endpoint no arquivo .properties:
+
+```text
+management.endpoints.web.exposure.include=info,health,prometheus
+```
+
+| Endpoint | Descrição \([fonte](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-endpoints)\) |
+| :--- | :--- |
+| prometheus |  Exposes metrics in a format that can be scraped by a Prometheus server. Requires a dependency on  `micrometer-registry-prometheus`. |
+
+Adicionar dependência do Micrometer:
+
+```markup
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-registry-prometheus</artifactId>
+</dependency>
+```
+
+## OpenTracing
+
+[Especificação ](https://opentracing.io/specification/)para rastreamento de requisições que passam por diversas aplicações em sistemas distribuídos. Conceitos importantes:
+
+1. **Trace:** trata-se do "caminho" que compreende uma requisição e todas as ações derivadas dela. Um _trace_ é formado por diversos _spans_.
+2. **Spans:** cada operação realizada em um _trace_. Tem os seguintes atributos: nome, início/fim, _tags_, _logs_ e _baggages_.
+3. **Tags:** Informações como nome do servico, método HTTP, etc.
+4. **Baggages:** Informações que trafegam entre spans diferentes. Pode ser qualquer informação tida como importante no _trace_ como um todo \(e.g. o ID do usuário que fez a requisição\).
+
+```text
+––|–––––––|–––––––|–––––––|–––––––|–––––––|–––––––|–––––––|–> time
+
+ [Span A···················································]
+   [Span B··············································]
+      [Span D··········································]
+    [Span C········································]
+         [Span E·······]        [Span F··] [Span G··] [Span H··]
+```
+
+### OpenTracing com Java
+
+O Spring disponibiliza a classe **Tracer** como implementação da especificação OpenTracing.
+
+```java
+public class PropostaController {
+
+  private final Tracer tracer;
+
+  public PropostaController(Tracer tracer) {
+    this.tracer = tracer;
+  }
+  
+  @PostMapping
+  public void cadastrar(@RequestBody Request request) {
+  
+    /* Usamos o método activeSpan() para pegar o span.
+     * Usamos o método setTag(chave, valor) para criar 
+     * uma tag no span. 
+     */
+    Span activeSpan = tracer.activeSpan();
+    activeSpan.setTag("user.email", "email@zup.com.br");
+    
+    /* Também podemos criar um novo item Baggage com o método 
+     * setBaggageItem(chave, valor)
+     */
+    activeSpan.setBaggageItem("user.email", "email@zup.com.br");
+    
+    /* O método log(mensagem) é usado para mostrar logs.
+     * O Spring por padrão já exibe todos os logs no Jaeger.
+     */
+    activeSpan.log("Meu log");
+    
+  }
+}
+```
+
+## Jaeger
+
+Implementação da especificação OpenTracing, um dos projetos apoiados pela Cloud Native Computing Foundation.
 
 
 
