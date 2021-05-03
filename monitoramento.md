@@ -120,6 +120,32 @@ Adicionar dependência do Micrometer:
 </dependency>
 ```
 
+### Métricas customizadas
+
+#### Nomenclatura:
+
+O nome da métrica deve seguir os padrões a seguir:
+
+1. A primeira palavra deve indicar o domínio ao qual a métrica pertence. É geralmente o nome da aplicação monitorada.  Exemplos: **`prometheus`**`_notifications_total`, **`proposta`**`_criadas_total`
+2. Deve ter uma única unidade base \(segundos, bytes, etc\). 
+3. A última palavra do nome deve informar a unidade da métrica. Exemplos: `http_request_duration_`**`seconds`,** `node_memory_usage_`**`bytes`**
+
+#### Labels
+
+Labels são usadas para diferenciar características da métrica. Por exemplo, uma métrica que calcula a quantidade de requisições de uma API pode ter as labels `create | update | delete` indicando as diferentes ações. Exemplos:
+
+`api_http_requests_total {operation="create|update|delete"}`
+
+`proposta_criadas_total {aplicacao="serviço de proposta", ambiente="desenvolvimento | produção | QA"}`
+
+{% hint style="info" %}
+A criação de Labels aumenta significativamente a quantidade de dados armazenados. Elas não devem ser usadas em casos em que há várias opções, como por exemplo labels para IDs, e-mails, etc.
+{% endhint %}
+
+
+
+
+
 ## OpenTracing
 
 [Especificação ](https://opentracing.io/specification/)para rastreamento de requisições que passam por diversas aplicações em sistemas distribuídos. Conceitos importantes:
