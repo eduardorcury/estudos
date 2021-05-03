@@ -142,9 +142,81 @@ Labels são usadas para diferenciar características da métrica. Por exemplo, u
 A criação de Labels aumenta significativamente a quantidade de dados armazenados. Elas não devem ser usadas em casos em que há várias opções, como por exemplo labels para IDs, e-mails, etc.
 {% endhint %}
 
+### Micrometer
 
+O Micrometer consegue expor métricas da aplicação para diferentes clientes de monitoramento, sem se acoplar a eles. Ou seja, se quisermos mudar de ferramenta, não precisaremos fazer modificações no código.
 
+* Para criar Tags comuns que serão adicionadas a todas as métricas:
 
+```java
+registry.config().commonTags("env", "prod"); 
+```
+
+{% hint style="info" %}
+No Spring, as Tags devem ser adicionadas através do  **`MeterRegistryCustomizer`** para assegurar que elas serão configuradas primeiro.
+{% endhint %}
+
+```java
+@Bean
+MeterRegistryCustomizer<MeterRegistry> metricsCommonTags() {
+    return registry -> registry.config().commonTags("env", "prod");
+}
+```
+
+#### Counters: métricas que só crescem \(ex: número de entidades criadas\)
+
+```java
+MeterRegistry registry = ...
+Counter counter = registry.counter("counter");
+counter.increment();
+```
+
+#### Gauges: capturar um valor atual \(ex: tamanho de listas, número de threads\)
+
+```java
+MeterRegistry registry = ...
+Collection<String> strings = new ArrayList<>();
+
+Collection<Tag> tags = new ArrayList<>();
+tags.add(Tag.of("emissora", "Mastercard"));
+tags.add(Tag.of("banco", "Itaú"));
+
+registry.gauge("meu_gauge", tags, strings, Collection::size);
+```
+
+#### Timers: mensurar pequenas durações de eventos e suas frequências
+
+```java
+Timer timerConsultarProposta = registry.timer("consultar_proposta", tags);
+timerConsultarProposta.record(() -> {
+    consultarProposta();
+});
+```
+
+Podemos usar a anotação **`@Timed`** para marcar métodos ou classes que queremos mensurar:
+
+```java
+@Service
+public class ExampleService {
+
+  @Timed
+  public void sync() {
+    // @Timed will record the execution time of this method,
+    // from the start and until it exits normally or exceptionally.
+    ...
+  }
+
+  @Async
+  @Timed
+  public CompletableFuture<?> async() {
+    // @Timed will record the execution time of this method,
+    // from the start and until the returned CompletableFuture
+    // completes normally or exceptionally.
+    return CompletableFuture.supplyAsync(...);
+  }
+
+}
+```
 
 ## OpenTracing
 
