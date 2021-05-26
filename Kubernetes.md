@@ -54,7 +54,8 @@ O IP do Pod é para acesso dentro do cluster. Para acesso dos containers fora do
 
 > A way to expose an application running on a set of pods as a network service
 
-1. ClusterIP: permite a comunicação entre pods **de dentro do Cluster**
+#### ClusterIP: permite a comunicação entre pods **de dentro do Cluster**
+
 Esse service está atrelado a um Pod. Assim, os service será responsável por direcionar todas as requisições feitas a ele para o Pod atralado. Para indicar qual Pod ele está atrelado, usamos **labels**.
 
 - Definindo um service ClusterIP:
@@ -87,4 +88,66 @@ spec:
 		  ports:
 			- containerPort: 80
 ```
+#### NodePort: permite a comunicação de fora do Cluster (também funciona como ClusterIP)
 
+Para acessar a aplicação de fora do cluster (em um navegador, por exemplo), criamos um service do tipo NodePort e atrelamos ao Pod que queremos acessar. Importante definir a propriedade *nodePort*, que será a porta que usaremos para acessar.
+O endereço IP para acesso externo do NodePort é o INTERNAL_IP do nó (`kubectl get node -o wide`)
+
+```yml
+apiVersion: v1
+kind: Service
+metadata:
+	name: svc-portal
+spec:
+	type: NodePort
+	ports:
+		- port: 80
+		  nodePort: 30000
+	selector:
+		app: portal-noticias
+```
+
+### Variáveis de ambiente
+
+Podemos definir variáveis de ambiente no arquivo yml:
+
+```yml
+# ...
+spec:
+	containers:
+		- name: db-noticias-container
+		  image: aluracursos/mysql-db:1
+		  ports:
+			- containerPort: 3306
+		  env:
+			- name: "MYSQL_ROOT_PASSWORD"
+			  value: "q1w2e3r4"
+			- name: "MYSQL_DATABASE"
+			  value: "empresa"
+			- name: "MYSQL_PASSWORD"
+			  value: "q1w2e3r4"
+```
+Ou através do ConfigMap:
+```yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+	name: db-configmap
+data:
+	MYSQL_ROOT_PASSWORD: "q1w2e3r4"
+	MYSQL_DATABASE: "empresa"
+	MYSQL_PASSWORD: "q1w2e3r4"
+```
+Referenciando o ConfigMap no arquivo de criação de Pod:
+```yml
+# ...
+spec:
+	containers:
+		- name: db-noticias-container
+		  image: aluracursos/mysql-db:1
+		  ports:
+			- containerPort: 3306
+		  envFrom:
+			- configMapRef:
+				name: db-configmap
+```
