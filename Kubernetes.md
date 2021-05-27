@@ -151,3 +151,36 @@ spec:
 			- configMapRef:
 				name: db-configmap
 ```
+
+### ReplicaSets e Deployments
+
+- Replica Set: Permite definir um número de Pods que queremos que estejam rodando a qualquer momento. Se um Pod morrer, o k8s criará outro Pod para substituir, mantendo o número de réplicas definido no ReplicaSet estável.
+- Deployment: permite o versionamento das mudanças no cluster. Os deployments definem automaticamente replica sets.
+
+Definindo um Deployment:
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+	name: portal-noticias-deployment
+spec:
+	template:
+		metadata:
+		name: portal-de-noticias
+		labels:
+			app: portal-noticias
+		spec:
+			containers:
+				- name: portal-de-noticias-container
+				  image: aluracursos/portal-noticias:1
+				  ports:
+					  - containerPort: 80
+				  envFrom:
+					  - configMapRef:
+						  name: portal-configmap
+	replicas: 3
+	selector:
+		matchLabels:
+			app: portal-noticias
+```
