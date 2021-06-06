@@ -1,0 +1,5 @@
+br\com\zup\ecommerce\KafkaService.class
+br\com\zup\ecommerce\GsonDeserializer.class
+br\com\zup\ecommerce\GsonSerializer.class
+br\com\zup\ecommerce\KafkaDispatcher.class
+br\com\zup\ecommerce\ConsumerFunction.class

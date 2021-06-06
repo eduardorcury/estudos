@@ -1,0 +1,51 @@
+- A tabela de alunos deve ser criada com os campos de email e nome como VARCHAR(30) e um campo idade como TINYINT. Também deve-se criar uma chave primária id do tipo INT que será auto-incrementada. O comando SQL seria:
+CREATE TABLE ALUNOS(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+        nome VARCHAR(30),
+        email VARCHAR(30),
+        idade TINYINT
+)
+- A tabela de avaliações terão campos VARCHAR para título e descrição, além da chave primária também.
+CREATE TABLE AVALIACOES(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+       titulo VARCHAR(50),
+       descricao VARCHAR(300)
+);
+- Também deve-se criar uma tabela de respostas. Essa tabela deve ter uma chave primária, um campo VARCHAR para as respostas e também campos para referenciar o aluno que a escreveu e a avaliação a qual ela pertence. Ou seja, ela terá 2 chaves estrangeiras responsáveis por definir os relacionamentos entre as tabelas (um para muitos entre aluno e resposta, e um para muitos entre avaliação e resposta).
+CREATE TABLE RESPOSTAS(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+        resposta VARCHAR(3000),
+        id_aluno INT,
+        id_avaliacao INT,
+        FOREIGN KEY (id_aluno) REFERENCES ALUNOS(id),
+        FOREIGN KEY (id_avaliacao) REFERENCES AVALIACOES(id)
+);
+- A tabela de correções tem campos para o id, a nota e a chave estrangeira que faz o relacionamento com a tabela de respostas.
+CREATE TABLE CORRECOES(
+	 id INT PRIMARY KEY AUTO_INCREMENT,
+        nota TINYINT,
+        id_resposta INT,
+        FOREIGN KEY (id_resposta) REFERENCES RESPOSTAS(id)
+);
+
+SELECT AL.id, AL.nome FROM alunos AL
+	INNER JOIN respostas R
+    ON AL.id = R.id_aluno
+    INNER JOIN avaliacoes AV 
+	ON R.id_avaliacao = AV.id
+    WHERE AV.titulo = 'HTTP';
+    
+SELECT AV.id, COUNT(*) FROM avaliacoes AV 
+	INNER JOIN respostas R 
+	ON AV.id = R.id_avaliacao
+    GROUP BY AV.id;
+    
+SELECT * FROM avaliacoes AV 
+	INNER JOIN respostas R 
+	ON AV.id = R.id_avaliacao;
+
+SELECT R.id_avaliacao, AVG(C.nota) FROM respostas R 
+	INNER JOIN correcoes C
+    ON C.id_resposta = R.id
+    GROUP BY R.id_avaliacao;
+

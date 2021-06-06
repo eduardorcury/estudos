@@ -1,0 +1,10 @@
+micronaut:
+  application:
+    name: carros
+datasources:
+  default:
+    url: jdbc:mysql://localhost:3306/carros-grcp?serverTimezone=UTC
+    # driverClassName: com.mysql.jdbc.Driver
+    username: eduardo
+    password: password
+    dialect: MySQL8Dialect
