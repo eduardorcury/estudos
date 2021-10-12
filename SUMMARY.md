@@ -27,3 +27,6 @@
 
 * [Backend com Node.js](outros/backend-com-node.js.md)
 
+## Certificação Java 11
+
+* [Data Types](certificacao-java-11/data-types.md)

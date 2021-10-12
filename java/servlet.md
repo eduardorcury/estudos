@@ -5,17 +5,16 @@
 ## Tomcat
 
 * Servidor Web escrito em Java;
-* Para acessar arquivos _.html_ do projeto:
+*   Para acessar arquivos _.html_ do projeto:
 
-  ```text
-    http://localhost:8080/(NomeDoProjeto)/(NomeDoArquivo).html
-  ```
+    ```
+      http://localhost:8080/(NomeDoProjeto)/(NomeDoArquivo).html
+    ```
 
-  ```text
-    http://localhost:8080/gerenciador/bem-vindo.html
-  ```
-
-* É um servlet container, responsável por criar os servlets \(_lazy_ por padrão\);
+    ```
+      http://localhost:8080/gerenciador/bem-vindo.html
+    ```
+* É um servlet container, responsável por criar os servlets (_lazy_ por padrão);
 
 ## Criando Servlet
 
@@ -51,17 +50,16 @@ public class OiMundoServlet extends HttpServlet {
 
 ### Acessar parâmetros da URL
 
-* Método **`getParameter`** do objeto **`request`** é responsável por obter os parâmetros;
+*   Método **`getParameter`** do objeto **`request`** é responsável por obter os parâmetros;
 
-  ```java
-    String nomeEmpresa = request.getParameter("nome");
-  ```
+    ```java
+      String nomeEmpresa = request.getParameter("nome");
+    ```
+*   Exemplo de URL:
 
-* Exemplo de URL:
-
-  ```text
-    http://http://localhost:8080/gerenciador/novaEmpresa?nome=Alura
-  ```
+    ```
+      http://http://localhost:8080/gerenciador/novaEmpresa?nome=Alura
+    ```
 
 ### POST VS GET
 
@@ -95,9 +93,9 @@ O método _service_ não restringe o tipo de método que deve ser utilizado na U
 1. **`doGet`**
 2. **`doPost`**
 3. **`doDelete`**
-4. **`doPut`**
+4.  **`doPut`**
 
-    ...
+     ...
 
 Usar o método errado na URL retorna o erro HTTP **405**: _Method not allowed_.
 
@@ -105,7 +103,7 @@ Usar o método errado na URL retorna o erro HTTP **405**: _Method not allowed_.
 
 ### Função
 
-Possibilita executar código Java dentro do HTML \(_scriplet_\). Código Java deve estar contido em **`<% [...] %>`** e respeitar todas as regras da linguagem \(ex: ponto e vírgula\)
+Possibilita executar código Java dentro do HTML (_scriplet_). Código Java deve estar contido em **`<% [...] %>`** e respeitar todas as regras da linguagem (ex: ponto e vírgula)
 
 ```markup
 <%
@@ -160,7 +158,7 @@ Ou, com **Expression Language**:
 
 ### JSTL
 
-É possível aumentar as funcionalidades do JSP com a biblioteca **JSTL** \(_Java Standard Tag Lib_\).
+É possível aumentar as funcionalidades do JSP com a biblioteca **JSTL** (_Java Standard Tag Lib_).
 
 > Não esquecer de baixar a dependência da JSTL no projeto.
 
@@ -260,19 +258,17 @@ O import da biblioteca é feito no começo do arquivo:
 
 ## Redirecionamento
 
-* Redirecionamento _server-side_: quando um _Servlet_ faz uma requisição a outro _Servlet_ a partir de um _dispatcher_;
+*   Redirecionamento _server-side_: quando um _Servlet_ faz uma requisição a outro _Servlet_ a partir de um _dispatcher_;
 
-  ```java
-    RequestDispatcher dispatcher =     request.getRequestDispatcher("/listaEmpresas");
-  ```
+    ```java
+      RequestDispatcher dispatcher =     request.getRequestDispatcher("/listaEmpresas");
+    ```
+*   Redirecionamento _client-side_: o _Servlet_ usa o navegador como intermediário.
 
-* Redirecionamento _client-side_: o _Servlet_ usa o navegador como intermediário.
+    ```java
+      response.sendRedirect("listaEmpresas");
+    ```
 
-  ```java
-    response.sendRedirect("listaEmpresas");
-  ```
-
-> Neste caso, a primeira requisição retornará um status code de **direcionamento** \(301 ou 302\).
+> Neste caso, a primeira requisição retornará um status code de **direcionamento** (301 ou 302).
 >
 > Como a requisição não é "passada" para o navegador, os atributos dela também não serão passados.
-

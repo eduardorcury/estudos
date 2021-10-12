@@ -32,19 +32,18 @@
 
 * Encapsulamento: esconder o comportamento dentro da classe.
 * Caso a regra de negócio "vaze", mudanças nessa regra terão de ser feitas em todos os lugares para onde ela vazou.
-* Não pergunte ao objeto sobre algo e tome uma decisão baseada na resposta, apenas diga ao objeto o que quer saber \(tell, don't ask\). 
+* Não pergunte ao objeto sobre algo e tome uma decisão baseada na resposta, apenas diga ao objeto o que quer saber (tell, don't ask). 
 * Devemos saber **o que** o método faz, mas não **como** ele faz.
 * Lei de Demeter: evitar invocações em cadeia, pois essas invocações são contra o encapsulamento.
 
 ## Liskov Substitutive Principle
 
 * Princípio Liskov:
-* As **pré-condições** da classe filha não devem ser **mais** restritas. Por exemplo, se a classe mãe recebe valores de 1 a 100 e a classe filha restringe a condição \(só recebe valor de 1 a 50\), isso pode quebrar outras classes que enviam números maiores que 50.
+* As **pré-condições** da classe filha não devem ser **mais** restritas. Por exemplo, se a classe mãe recebe valores de 1 a 100 e a classe filha restringe a condição (só recebe valor de 1 a 50), isso pode quebrar outras classes que enviam números maiores que 50.
 * De maneira análoga, as **pós-condições** da classe filha não devem ser **menos** restritas. Se a classe mãe retorna valores de 1 a 100 e a classe filha retorna de 1 a 200, isso pode quebrar classes que esperam valores menores que 100.
 
 [Artigo Medium sobre Liskov](https://medium.com/@tbaragao/solid-l-s-p-liskov-substitution-principle-3a31c3a7b49e)
 
-* Composição: uma instância da classe existente é usada como componente da outra classe. É um relacionamento _**tem um**_, diferente do relacionamento de herança \(_**é um**_\).
+* Composição: uma instância da classe existente é usada como componente da outra classe. É um relacionamento _**tem um**_, diferente do relacionamento de herança (_**é um**_).
 
 [Composição x Herança](https://en.wikipedia.org/wiki/Composition_over_inheritance)
-

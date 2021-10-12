@@ -22,5 +22,4 @@
 
 ## Aprender uma coisa por vez
 
-​ Fazer de 8 a 10 matérias completamente diferentes uma da outra e tentar aprender todas é impossível \(aprende universidade\). É mais importante focar em uma ou duas e assegurar que você realmente aprendeu.
-
+​ Fazer de 8 a 10 matérias completamente diferentes uma da outra e tentar aprender todas é impossível (aprende universidade). É mais importante focar em uma ou duas e assegurar que você realmente aprendeu.

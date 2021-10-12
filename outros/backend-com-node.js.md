@@ -1,6 +1,6 @@
 # Backend com Node.js
 
-> Next Level Week \#4
+> Next Level Week #4
 
 ## Configuração de API
 
@@ -347,7 +347,7 @@ export { UserController };
   npm install --save-dev ts-jest
 ```
 
-* Supertest \(para criar _requests_\)
+* Supertest (para criar _requests_)
 
 ```bash
   npm install --save-dev supertest @types/supertest
@@ -377,7 +377,7 @@ export { UserController };
 * [x] Modificar _server.ts_ para somente rodar o servidor
 * [x] Criar arquivo responsável por criar a conexão com banco
 * [x] Inserir variável de ambiente ao executar comando de teste
-* Arquivo _app.ts_
+* [ ] Arquivo _app.ts_
 
 ```typescript
   import 'reflect-metadata';
@@ -431,4 +431,3 @@ export { UserController };
     }
   }
 ```
-
