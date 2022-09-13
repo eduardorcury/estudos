@@ -30,3 +30,4 @@
 ## Certificação Java 11
 
 * [Data Types](certificacao-java-11/data-types.md)
+* [Variáveis](certificacao-java-11/variaveis.md)
