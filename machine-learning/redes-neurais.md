@@ -67,3 +67,13 @@ O resultado da operação de soma é usado na **função de ativação**.
 <figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>Funções de Ativação</p></figcaption></figure>
 
 ### Cálculo do Erro
+
+O cálculo do erro de uma rede neural é feito pela diferença do output desejado e output real de todos os nós de output. O erro total é calculado considerando todos os exemplos de treinamento da rede.
+
+Tipos de fórmulas do erro total:
+
+* Mean Squared Error: Erros são elavados ao quadrado, somados e dividos pelo número de exemplos.
+* Squared Error: Igual ao primeiro, mas a somatória dos erros é dividida por 2.
+* Root Mean Square: Igual ao primeiro, mas o resultado é a raiz quadrada da média.
+
+### Cálculo do Gradiente
