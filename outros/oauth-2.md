@@ -26,7 +26,7 @@ OAuth é um protocolo de autorização que permite que um serviço autorize o ac
 
 #### Fluxo:
 
-![Exemplo de fluxo OAuth](.gitbook/assets/oauth.PNG)
+![Exemplo de fluxo OAuth](../.gitbook/assets/oauth.PNG)
 
 * A Yelp te mostra um botão, algo como "Conectar com o Google".
 * O botão te leva a uma página **da Google**, onde você pode colocar seu e-mail e senha. Aqui, você está enviando dados para o Authorization Server. Além disso, você está enviando uma URL de redirecionamento para a Google.

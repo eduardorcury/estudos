@@ -1,10 +1,6 @@
 # Table of contents
 
 * [Meus estudos](README.md)
-* [Segurança: autenticação e autorização](oauth-2.md)
-* [Monitoramento](monitoramento.md)
-* [Docker](docker.md)
-* [Consultas com SQL](consultas-com-sql.md)
 
 ## Spring
 
@@ -26,6 +22,10 @@
 ## Outros
 
 * [Backend com Node.js](outros/backend-com-node.js.md)
+* [Consultas com SQL](outros/consultas-com-sql.md)
+* [Docker](outros/docker.md)
+* [Segurança: autenticação e autorização](outros/oauth-2.md)
+* [Monitoramento](outros/monitoramento.md)
 
 ## Certificação Java 11
 
