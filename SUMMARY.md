@@ -31,3 +31,7 @@
 
 * [Data Types](certificacao-java-11/data-types.md)
 * [Variáveis](certificacao-java-11/variaveis.md)
+
+## Machine Learning
+
+* [Redes Neurais](machine-learning/redes-neurais.md)
