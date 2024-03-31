@@ -1,15 +1,7 @@
 ---
-description: Estudos sobre machine learning e redes neurais
+description: Estudos durante o Orange Talents
 ---
 
-# 💻 Machine Learning
+# Meus estudos
 
-## Algoritmos de Machine Learning
-
-| Tipo            | Exemplo 1           | Exemplo 2            |
-| --------------- | ------------------- | -------------------- |
-| Regression      | Logistic Regression | Linear Regression    |
-| Decision Tree   | CART                | ID3                  |
-| Clustering      | Naive Bayes         | Gaussian Naive Bayes |
-| Neural Networks | Back Propagation    | Convolution (CNN)    |
-
+![](.gitbook/assets/orange-talents.png)
