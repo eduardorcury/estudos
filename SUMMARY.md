@@ -34,4 +34,5 @@
 
 ## Machine Learning
 
+* [Livros](machine-learning/livros.md)
 * [Redes Neurais](machine-learning/redes-neurais.md)
