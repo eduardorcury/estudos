@@ -82,9 +82,9 @@ A arquitetura do Logback é dividida em 3 camadas descritas a seguir: Logger, Ap
       log.debug("Mensagem é {}", mensagem);
     ```
 
-> ## É possível passar uma exceção como parâmetro como **último argumento do método**. O Logger irá printar o stack trace da exceção informada.
+> ### É possível passar uma exceção como parâmetro como **último argumento do método**. O Logger irá printar o stack trace da exceção informada.
 >
-> ### Arquivo de Configuração
+> #### Arquivo de Configuração
 
 * O arquivo de configuração deve estar no classpath (na pasta resources) e deve ser nomeado logback-spring.xml, logback-test.xml ou logback.xml.
 * Exemplo de arquivo de configuração:
@@ -102,10 +102,10 @@ A arquitetura do Logback é dividida em 3 camadas descritas a seguir: Logger, Ap
 </configuration>
 ```
 
-1. Usamos o appender `ConsoleAppender` pois queremos que os logs sejam mostrados no console. 
+1. Usamos o appender `ConsoleAppender` pois queremos que os logs sejam mostrados no console.
 2.  Na tag encoder informamos como desejamos ver os Logs. Nesse caso, usamos um pattern de exibição. Esse pattern em específico loga a mensagem no seguinte formato:
 
-     `20:44:44.241 [main] DEBUG com.logback - Hi there!`
+    `20:44:44.241 [main] DEBUG com.logback - Hi there!`
 3. Na tag root definimos o nível do Logger-pai, e associamos ele ao appender definido anteriormente.
 4.  Quer saber se a configuração está escrita corretamente? Use o parâmetro `debug=true` na tag de configuration:
 
@@ -129,7 +129,7 @@ A arquitetura do Logback é dividida em 3 camadas descritas a seguir: Logger, Ap
      </appender>
     ```
 
-     Propriedades também podem ser configuradas com outros meios, como por exemplo variáveis de ambiente:
+    Propriedades também podem ser configuradas com outros meios, como por exemplo variáveis de ambiente:
 
     ```
      `java -DLOG_DIR=/var/log/application`

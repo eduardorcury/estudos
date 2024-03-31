@@ -30,7 +30,7 @@ OAuth é um protocolo de autorização que permite que um serviço autorize o ac
 
 * A Yelp te mostra um botão, algo como "Conectar com o Google".
 * O botão te leva a uma página **da Google**, onde você pode colocar seu e-mail e senha. Aqui, você está enviando dados para o Authorization Server. Além disso, você está enviando uma URL de redirecionamento para a Google.
-* A Google te mostra uma página dizendo que a Yelp quer acessar seus **contatos**. 
+* A Google te mostra uma página dizendo que a Yelp quer acessar seus **contatos**.
 * Se você aceitar, você é redirecionado ao Callback URL informado na etapa anterior, junto com um **Authorization Code**.
 * A Yelp agora envia o Authorization Code ao Authorization Server e pede o Access Token.
 * De posse do Access Token, a Yelp agora consegue pedir ao Resource Server os seus contatos.
@@ -54,7 +54,7 @@ O OAuth resolve os problemas de **autorização, mas não de autenticação**. O
 
 ### **SSO**
 
-**Single Sing On (SSO) **é uma ferramenta de autenticação que permite que um usuário se autentique em **múltiplos sistemas de uma organização **com um único login/senha. SSO permite que eu tenha acesso a Google Agenda, Google Meet e GMail me autenticando somente uma vez, mesmo esses sendo sistemas/aplicações completamente distintas. SSO é uma parte de um sistema IAM.
+\*\*Single Sing On (SSO) \*\*é uma ferramenta de autenticação que permite que um usuário se autentique em \*\*múltiplos sistemas de uma organização \*\*com um único login/senha. SSO permite que eu tenha acesso a Google Agenda, Google Meet e GMail me autenticando somente uma vez, mesmo esses sendo sistemas/aplicações completamente distintas. SSO é uma parte de um sistema IAM.
 
 [Artigo sobre SSO](https://www.okta.com/blog/2021/02/single-sign-on-sso/)
 
@@ -62,7 +62,7 @@ O OAuth resolve os problemas de **autorização, mas não de autenticação**. O
 
 ### FIM
 
-_Federated identity management _é um contrato feito por diferentes empresas que permite que usuários acessem diferentes aplicações com as mesmas credenciais. A diferença entra FIM e SSO é que, enquanto SSO autentica usuários em diferentes aplicações **da mesma empresa**, FIM é usado para fazer o mesmo em aplicações **de diferentes empresas**.
+\_Federated identity management \_é um contrato feito por diferentes empresas que permite que usuários acessem diferentes aplicações com as mesmas credenciais. A diferença entra FIM e SSO é que, enquanto SSO autentica usuários em diferentes aplicações **da mesma empresa**, FIM é usado para fazer o mesmo em aplicações **de diferentes empresas**.
 
 > As a solution, FIM was developed as a set of agreements and standards that help enterprises and applications share user identities. Essentially, it’s an arrangement that can be made among multiple organizations so that subscribers can use the same identifiers to access various applications.
 
@@ -74,15 +74,13 @@ A Security Assertion Markup Language é responsável por permitir a **comunicaç
 
 > SAML, therefore, is the link between the authentication of a user’s identity and the authorization to use a service. It’s the language that helps IdPs and SPs communicate. When an employer (the IdP) and a SaaS company (the SP) both implement SAML, they are able to seamlessly authenticate accredited users.
 
-![](https://lh5.googleusercontent.com/8\_717sucUXP54By7X9FVEPe-CpvxNTOYKGoM2LgIu1jwCEpbNB_tTmNRuZniDODyG5wZyceEexOacRIOWbHjY0x5ZdejE-EvHn-UUkd8UeufU77PVxJrpbY-UBFm-BqsuK6IAPhm)
-
-
+![](https://lh5.googleusercontent.com/8\_717sucUXP54By7X9FVEPe-CpvxNTOYKGoM2LgIu1jwCEpbNB\_tTmNRuZniDODyG5wZyceEexOacRIOWbHjY0x5ZdejE-EvHn-UUkd8UeufU77PVxJrpbY-UBFm-BqsuK6IAPhm)
 
 ### OAuth x SAML x OpenID
 
 Esses três conceitos são diferentes, e usados em situações distintas ([fonte](https://www.okta.com/identity-101/whats-the-difference-between-oauth-openid-connect-and-saml/)).
 
-* OAuth é um meio de **autorizar** que aplicações terceiras acessem recursos específicos de um sistema. 
+* OAuth é um meio de **autorizar** que aplicações terceiras acessem recursos específicos de um sistema.
 * Como OAuth não lida com autenticação, temos o OpenID para essa tarefa. O OpenID usa tokens JWT para enviar informações sobre o usuário para a aplicação terceira. OAuth e OpenID podem ser (e geralmente são) usados em conjunto.
 * SAML está mais relacionado ao SSO. Provê autenticação e autorização de usuários ao sistema.
 
@@ -90,15 +88,6 @@ Esses três conceitos são diferentes, e usados em situações distintas ([fonte
 
 > Sistema externo especializado em lidar com autorização
 
-[Documentação](https://www.keycloak.org/docs/latest/server_admin/#overview)
+[Documentação](https://www.keycloak.org/docs/latest/server\_admin/#overview)
 
-Usado como _Authorization Server. _Trata-se de um outro servidor no sistema, com o propósito de autenticar e autorizar o usuário. Como os usuários são redirecionados do browser ao servidor onde informam suas credencias, o browser não tem conhecimento dessas informações. O _Authorization Server  _retorna um **token** com informações do usuário (nome, e-mail, etc), além das suas **permissões**.
-
-
-
-
-
-
-
-
-
+Usado como \_Authorization Server. \_Trata-se de um outro servidor no sistema, com o propósito de autenticar e autorizar o usuário. Como os usuários são redirecionados do browser ao servidor onde informam suas credencias, o browser não tem conhecimento dessas informações. O \_Authorization Server \_retorna um **token** com informações do usuário (nome, e-mail, etc), além das suas **permissões**.

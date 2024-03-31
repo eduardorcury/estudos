@@ -4,7 +4,7 @@
 
 *   Nada de ficar usando _setters_ na hora de construir um objeto! Use o construtor direto, não faz sentido criar um POJO que esteja faltando atributos obrigatórios.
 
-    :white_check_mark:
+    :white\_check\_mark:
 
     ```java
       Produto produto = new Produto(request.getNome(), request.getEstoque());
@@ -23,7 +23,7 @@
 * Nada de receber um objeto model diretamente no _endpoint_, nem enviar um objeto model como resposta.
 *   Para isso, criamos objetos específicos (`AutorRequest` e `AutorResponse`, por exemplo).
 
-    :white_check_mark:
+    :white\_check\_mark:
 
     ```java
       @PostMapping
@@ -53,7 +53,7 @@
 * Neste caso, devemos usar testes de integração e simular o comportamento da forma mais fiel possível.
 *   Testes de integração testam a classe de maneira integrada ao serviço que usam. Um teste de DAO, por exemplo, que bate em um banco de dados de verdade, é considerado um teste de integração. Testes como esses são especialmente úteis para testar classes cuja responsabilidade é se comunicar com outros serviços.
 
-    :white_check_mark:
+    :white\_check\_mark:
 
     ```java
       public class UsuarioDaoTest {  
@@ -101,7 +101,7 @@
 * Os testes anteriores não devem influenciar os testes seguintes. Para conseguirmos isso quando estamos testando um banco de dados, por exemplo, usamos transações.
 *   Dessa forma, no método **@Before** nós iniciamos a transação, e no **@After** damos _rollback_.
 
-    :white_check_mark:
+    :white\_check\_mark:
 
     ```java
       @Before  

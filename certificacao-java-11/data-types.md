@@ -12,7 +12,7 @@ Boolean objeto = null;
 boolean primitivo = objeto; // Resulta em NullPointer
 ```
 
-* Referências: apontam para o objeto e armazena o endereço de memória em que o objeto pode ser encontrado. 
+* Referências: apontam para o objeto e armazena o endereço de memória em que o objeto pode ser encontrado.
 
 ### Tipos primitivos
 
@@ -27,9 +27,9 @@ boolean primitivo = objeto; // Resulta em NullPointer
 | _double_  | 64 bits (ponto flutuante) |                                                |
 | _char_    | 16 bits                   |                                                |
 
-* Todos os tipos numéricos tem sinal, o que significa que um bit é reservado para indicar o sinal positivo ou negativo do número. Por isso, a range de um byte é $$[-128, ..., 0, ..., 127]  (2^7=128)$$
+* Todos os tipos numéricos tem sinal, o que significa que um bit é reservado para indicar o sinal positivo ou negativo do número. Por isso, a range de um byte é $$[-128, ..., 0, ..., 127] (2^7=128)$$
 * String **não é** um tipo primitivo.
-* O java assume que estamos definindo um _**int **_quando escrevemos um número no código. Tentar atribuir um número maior que o máximo de 32 bits ($$2^{31}$$) resulta em erro de compilação.
+* O java assume que estamos definindo um \_\*\*int \*\*\_quando escrevemos um número no código. Tentar atribuir um número maior que o máximo de 32 bits ($$2^{31}$$) resulta em erro de compilação.
 
 ```java
 long a = 4_000_000_000;  // não compila
@@ -48,7 +48,7 @@ long d   = _1000;   // não compila
 
 Como os caracteres tem uma representação em decimal, é possível atribuir um caractere a um tipo primitivo numérico, e um número a um [_char_](https://unicode-table.com/en/).
 
-No entanto, é preciso respeitar os valores **mínimos e máximos** dos tipos primitivos para o código compilar, _e.g_., atribuir um _char _de número maior que 127 a um byte causa um erro de compilação.
+No entanto, é preciso respeitar os valores **mínimos e máximos** dos tipos primitivos para o código compilar, _e.g_., atribuir um \_char \_de número maior que 127 a um byte causa um erro de compilação.
 
 ```java
 double slash = '/';

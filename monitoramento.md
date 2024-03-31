@@ -17,18 +17,18 @@ O método RED (Rate, Errors & Duration) analisa a quantidade de solicitações p
 > Using these basic metrics most problems that an end user might face with your web app can be captured, such as how many errors there are and how slow their service is ([fonte](https://www.weave.works/docs/cloud/latest/tasks/monitor/best-instrumenting/)).
 
 {% hint style="info" %}
-Uma das limitações desse método é que ele só pode ser usado em aplicações que lidam com requisições, sendo inadequado em sistemas _batch _ou de _streaming_.
+Uma das limitações desse método é que ele só pode ser usado em aplicações que lidam com requisições, sendo inadequado em sistemas \_batch \_ou de _streaming_.
 {% endhint %}
 
 ### Método USE
 
 O método USE (Utilization, Saturation & Error) aborda as métricas de utilização de um recurso (e. g. a média da porcentagem de utilização de CPU em um dado mês), o quanto o serviço está trabalhando mais que sua capacidade (e .g. quantidade de requisições em uma fila de espera) e a quantidade de requisições que resultaram em erro.
 
->  For every resource, check utilization, saturation, and errors ([fonte](http://www.brendangregg.com/usemethod.html)).
+> For every resource, check utilization, saturation, and errors ([fonte](http://www.brendangregg.com/usemethod.html)).
 >
-> **resource**: all physical server functional components (CPUs, disks, busses, ...) 
+> **resource**: all physical server functional components (CPUs, disks, busses, ...)
 >
-> **utilization**: the average time that the resource was busy servicing work 
+> **utilization**: the average time that the resource was busy servicing work
 >
 > **saturation**: the degree to which the resource has extra work which it can't service, often queued
 >
@@ -51,8 +51,8 @@ Como exemplos de recursos de servidores, temos:
 
 ![](https://prometheus.io/assets/architecture.png)
 
-* **Pull Method: **o servidor do Prometheus se encarrega de pegar as métricas através de requisições HTTP. Recomendado na maioria das APIs.
-* **Push Method:** a aplicação é responsável por enviar as métricas a um _Pushgateway. _Recomendado apenas para processos _batch_ e _serverless_.
+* \*\*Pull Method: \*\*o servidor do Prometheus se encarrega de pegar as métricas através de requisições HTTP. Recomendado na maioria das APIs.
+* **Push Method:** a aplicação é responsável por enviar as métricas a um \_Pushgateway. \_Recomendado apenas para processos _batch_ e _serverless_.
 
 ### Arquivo de configuração
 
@@ -109,7 +109,7 @@ management.endpoints.web.exposure.include=info,health,prometheus
 
 | Endpoint   | Descrição ([fonte](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-endpoints)) |
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| prometheus |  Exposes metrics in a format that can be scraped by a Prometheus server. Requires a dependency on  `micrometer-registry-prometheus`.          |
+| prometheus | Exposes metrics in a format that can be scraped by a Prometheus server. Requires a dependency on `micrometer-registry-prometheus`.            |
 
 Adicionar dependência do Micrometer:
 
@@ -126,9 +126,9 @@ Adicionar dependência do Micrometer:
 
 O nome da métrica deve seguir os padrões a seguir:
 
-1. A primeira palavra deve indicar o domínio ao qual a métrica pertence. É geralmente o nome da aplicação monitorada.  Exemplos: **`prometheus`**`_notifications_total`, **`proposta`**`_criadas_total`
-2. Deve ter uma única unidade base (segundos, bytes, etc). 
-3. A última palavra do nome deve informar a unidade da métrica. Exemplos: `http_request_duration_`**`seconds`, **`node_memory_usage_`**`bytes`**
+1. A primeira palavra deve indicar o domínio ao qual a métrica pertence. É geralmente o nome da aplicação monitorada. Exemplos: **`prometheus`**`_notifications_total`, **`proposta`**`_criadas_total`
+2. Deve ter uma única unidade base (segundos, bytes, etc).
+3. A última palavra do nome deve informar a unidade da métrica. Exemplos: `http_request_duration_`**`seconds`, `node_memory_usage_bytes`**
 
 #### Labels
 
@@ -153,7 +153,7 @@ registry.config().commonTags("env", "prod");
 ```
 
 {% hint style="info" %}
-No Spring, as Tags devem ser adicionadas através do  **`MeterRegistryCustomizer`** para assegurar que elas serão configuradas primeiro.
+No Spring, as Tags devem ser adicionadas através do **`MeterRegistryCustomizer`** para assegurar que elas serão configuradas primeiro.
 {% endhint %}
 
 ```java
@@ -222,10 +222,10 @@ public class ExampleService {
 
 [Especificação ](https://opentracing.io/specification/)para rastreamento de requisições que passam por diversas aplicações em sistemas distribuídos. Conceitos importantes:
 
-1. **Trace: **trata-se do "caminho" que compreende uma requisição e todas as ações derivadas dela. Um _trace_ é formado por diversos _spans_.
-2. **Spans: **cada operação realizada em um _trace_. Tem os seguintes atributos: nome, início/fim, _tags_, _logs _e _baggages_.
-3. **Tags: **Informações como nome do servico, método HTTP, etc.
-4. **Baggages: **Informações que trafegam entre spans diferentes. Pode ser qualquer informação tida como importante no _trace _como um todo (e.g. o ID do usuário que fez a requisição).
+1. \*\*Trace: \*\*trata-se do "caminho" que compreende uma requisição e todas as ações derivadas dela. Um _trace_ é formado por diversos _spans_.
+2. \*\*Spans: \*\*cada operação realizada em um _trace_. Tem os seguintes atributos: nome, início/fim, _tags_, \_logs \_e _baggages_.
+3. \*\*Tags: \*\*Informações como nome do servico, método HTTP, etc.
+4. \*\*Baggages: \*\*Informações que trafegam entre spans diferentes. Pode ser qualquer informação tida como importante no \_trace \_como um todo (e.g. o ID do usuário que fez a requisição).
 
 ```
 ––|–––––––|–––––––|–––––––|–––––––|–––––––|–––––––|–––––––|–> time
@@ -239,7 +239,7 @@ public class ExampleService {
 
 ### OpenTracing com Java
 
-O Spring disponibiliza a classe **Tracer **como implementação da especificação OpenTracing.
+O Spring disponibiliza a classe \*\*Tracer \*\*como implementação da especificação OpenTracing.
 
 ```java
 public class PropostaController {
@@ -277,4 +277,3 @@ public class PropostaController {
 ## Jaeger
 
 Implementação da especificação OpenTracing, um dos projetos apoiados pela Cloud Native Computing Foundation.
-

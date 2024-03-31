@@ -32,7 +32,7 @@
 
 * Encapsulamento: esconder o comportamento dentro da classe.
 * Caso a regra de negócio "vaze", mudanças nessa regra terão de ser feitas em todos os lugares para onde ela vazou.
-* Não pergunte ao objeto sobre algo e tome uma decisão baseada na resposta, apenas diga ao objeto o que quer saber (tell, don't ask). 
+* Não pergunte ao objeto sobre algo e tome uma decisão baseada na resposta, apenas diga ao objeto o que quer saber (tell, don't ask).
 * Devemos saber **o que** o método faz, mas não **como** ele faz.
 * Lei de Demeter: evitar invocações em cadeia, pois essas invocações são contra o encapsulamento.
 
@@ -46,4 +46,4 @@
 
 * Composição: uma instância da classe existente é usada como componente da outra classe. É um relacionamento _**tem um**_, diferente do relacionamento de herança (_**é um**_).
 
-[Composição x Herança](https://en.wikipedia.org/wiki/Composition_over_inheritance)
+[Composição x Herança](https://en.wikipedia.org/wiki/Composition\_over\_inheritance)

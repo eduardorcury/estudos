@@ -152,7 +152,7 @@ docker run -it -v "C:\Users\eduardo.cury\Desktop:/var/www" ubuntu
 * O comando **`COPY`** informa o código que queremos copiar para dentro da imagem.
 * Para informar a pasta em que os comandos devem ser executados (_working directory_), nós usamos o comando **`WORKDIR`**.
 * Usamos **`RUN`** para especificar um comando a ser executado na imagem.
-* O comando **`ENTRYPOINT`** informa o comando a ser executado assim que o container for startado. 
+* O comando **`ENTRYPOINT`** informa o comando a ser executado assim que o container for startado.
 * Para indicar qual porta será exposta pela aplicação, usamos o comando **`EXPOSE`**
 
 ```bash

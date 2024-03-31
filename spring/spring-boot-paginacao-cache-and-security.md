@@ -717,5 +717,5 @@ public class AuntenticacaoViaTokenFilter extends OncePerRequestFilter {
 
 ### Perguntar
 
-* Na API do curso de Spring Boot, se eu inserir um tópico com um nome de curso que não existe, ele cadastra com sucesso o tópico e no banco de dados a coluna curso_id fica como null. Eu imagino que isso não seja ideal, qual a melhor forma de corrigir isso? Colocar Not Null nesse campo na tabela ou fazer uma lógica no DTO depois de consultar o repositório de cursos?
-* O cache pode ser usado em outras APIs? 
+* Na API do curso de Spring Boot, se eu inserir um tópico com um nome de curso que não existe, ele cadastra com sucesso o tópico e no banco de dados a coluna curso\_id fica como null. Eu imagino que isso não seja ideal, qual a melhor forma de corrigir isso? Colocar Not Null nesse campo na tabela ou fazer uma lógica no DTO depois de consultar o repositório de cursos?
+* O cache pode ser usado em outras APIs?

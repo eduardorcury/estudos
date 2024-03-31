@@ -95,7 +95,7 @@ O método _service_ não restringe o tipo de método que deve ser utilizado na U
 3. **`doDelete`**
 4.  **`doPut`**
 
-     ...
+    ...
 
 Usar o método errado na URL retorna o erro HTTP **405**: _Method not allowed_.
 
