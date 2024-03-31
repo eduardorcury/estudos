@@ -62,6 +62,8 @@ $$
 
 em que _x_ é o nó em questão e _w_ é o peso do nó.
 
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption><p>Forward propagation</p></figcaption></figure>
+
 O resultado da operação de soma é usado na **função de ativação**.
 
 <figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>Funções de Ativação</p></figcaption></figure>
