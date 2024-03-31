@@ -50,7 +50,7 @@ As redes neurais pode ser do tipo:
 Dividida em 5 partes: propagação, cálculo do erro, cálculo dos gradientes, checagem dos gradientes, atualização dos pesos.
 {% endhint %}
 
-## Forward Propagation
+### Forward Propagation
 
 Dividida em 2 etapas: **operação de soma** e **função de ativação**.
 
