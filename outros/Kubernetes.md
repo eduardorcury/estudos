@@ -184,3 +184,4 @@ spec:
 		matchLabels:
 			app: portal-noticias
 ```
+teste
