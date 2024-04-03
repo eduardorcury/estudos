@@ -85,3 +85,23 @@ O cálculo de gradientes é a distribuição do erro total de uma rede entre os 
 O gradiente é a derivada parcial de um peso em relação ao erro total. **O gradiente nos diz o quanto uma mudança em determinado peso afeta o erro da rede.**
 
 O gradiente de uma layer depende do cálculo dos gradientes das layers mais internas.
+
+### Checagem dos gradientes
+
+O gradiente calculado de um peso pode ser comparado com o gradiente estimado.
+
+O gradiente estimado é calculado alterando o peso em questão e calculando o erro total da rede com essa alteração.
+
+$$
+Gradiente=\dfrac{Erro(\theta+\epsilon)-Erro(\theta-\epsilon)}{2\epsilon}
+$$
+
+em que:
+
+* theta é um vetor contendo todos os pesos da rede.
+* epsilon é uma constante geralmente igual a 0,0001 ou 0,00001.
+* o valor de epsilon é somente somado ou subtraído do peso desejado.
+
+Com o gradiente estimado e calculado em mãos, obtemos o erro relativo (diferença entre calculado e estimado dividida pelo maior valor entre ambos).
+
+<table><thead><tr><th width="217">Erro relativo</th><th>Indicação</th></tr></thead><tbody><tr><td><span class="math">> 10^{-2}</span></td><td>Grandes chances do gradiente estar errado</td></tr><tr><td><span class="math">&#x3C; 10^{-2}</span>e <span class="math">> 10^{-4}</span></td><td>Provável que o grandiente está errado</td></tr><tr><td><span class="math">&#x3C; 10^{-5}</span>e <span class="math">> 10^{-6}</span></td><td>Gradiente pode estar certo, mas prosseguir com cautela</td></tr><tr><td><span class="math">\leq 10^{-7}</span></td><td>Grandes chances do gradiente estar certo</td></tr></tbody></table>
