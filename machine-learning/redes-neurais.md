@@ -79,3 +79,9 @@ Tipos de fórmulas do erro total:
 * Root Mean Square: Igual ao primeiro, mas o resultado é a raiz quadrada da média.
 
 ### Cálculo do Gradiente
+
+O cálculo de gradientes é a distribuição do erro total de uma rede entre os pesos da mesma.
+
+O gradiente é a derivada parcial de um peso em relação ao erro total. **O gradiente nos diz o quanto uma mudança em determinado peso afeta o erro da rede.**
+
+O gradiente de uma layer depende do cálculo dos gradientes das layers mais internas.
