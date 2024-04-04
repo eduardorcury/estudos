@@ -37,7 +37,7 @@ Input nodes representa uma feature. Supondo uma rede neural de reconhecimento de
 
 Uma rede neural contém 3 partes: _input layer, hidden layer e output layer_.
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>Layers de rede neural</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption><p>Layers de rede neural</p></figcaption></figure>
 
 As redes neurais pode ser do tipo:
 
@@ -62,11 +62,11 @@ $$
 
 em que _x_ é o nó em questão e _w_ é o peso do nó.
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption><p>Forward propagation</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>Forward propagation</p></figcaption></figure>
 
 O resultado da operação de soma é usado na **função de ativação**.
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>Funções de Ativação</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Funções de Ativação</p></figcaption></figure>
 
 ### Cálculo do Erro
 
@@ -105,3 +105,17 @@ em que:
 Com o gradiente estimado e calculado em mãos, obtemos o erro relativo (diferença entre calculado e estimado dividida pelo maior valor entre ambos).
 
 <table><thead><tr><th width="217">Erro relativo</th><th>Indicação</th></tr></thead><tbody><tr><td><span class="math">> 10^{-2}</span></td><td>Grandes chances do gradiente estar errado</td></tr><tr><td><span class="math">&#x3C; 10^{-2}</span>e <span class="math">> 10^{-4}</span></td><td>Provável que o grandiente está errado</td></tr><tr><td><span class="math">&#x3C; 10^{-5}</span>e <span class="math">> 10^{-6}</span></td><td>Gradiente pode estar certo, mas prosseguir com cautela</td></tr><tr><td><span class="math">\leq 10^{-7}</span></td><td>Grandes chances do gradiente estar certo</td></tr></tbody></table>
+
+### Atualização dos pesos
+
+Os pesos são atualizados usando o método do gradiente.
+
+> Para encontrar um [mínimo](https://pt.wikipedia.org/wiki/M%C3%ADnimo) (local) de uma função usa-se um esquema iterativo, onde em cada passo se toma a direção (negativa) do [gradiente](https://pt.wikipedia.org/wiki/Gradiente), que corresponde à direção de declive máximo.
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+Existem 3 métodos principais nessa etapa para redes neurais:
+
+* Batch gradient descent: os pesos são atualizados depois que todos os elementos de treinamento são analisados.
+* Stochastic gradient descent: os pesos são atualizados depois de cada análise individual do elemento. Se o conjunto de testes tiver 1000 elementos, os pesos serão atualizados 1000 vezes.
+* Mini-batch gradient descent: intermediário entre os 2 anteriores, os pesos são atualizados depois de um número fixo de elementos analisados.

@@ -82,9 +82,9 @@ A arquitetura do Logback é dividida em 3 camadas descritas a seguir: Logger, Ap
       log.debug("Mensagem é {}", mensagem);
     ```
 
-> ### É possível passar uma exceção como parâmetro como **último argumento do método**. O Logger irá printar o stack trace da exceção informada.
+> #### É possível passar uma exceção como parâmetro como **último argumento do método**. O Logger irá printar o stack trace da exceção informada.
 >
-> #### Arquivo de Configuração
+> **Arquivo de Configuração**
 
 * O arquivo de configuração deve estar no classpath (na pasta resources) e deve ser nomeado logback-spring.xml, logback-test.xml ou logback.xml.
 * Exemplo de arquivo de configuração:
