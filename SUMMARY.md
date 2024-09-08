@@ -37,3 +37,4 @@
 * [Livros](machine-learning/livros.md)
 * [Redes Neurais](machine-learning/redes-neurais.md)
 * [Pandas](machine-learning/pandas.md)
+* [Métricas de Desempenho](machine-learning/metricas-de-desempenho.md)
