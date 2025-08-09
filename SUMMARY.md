@@ -38,3 +38,7 @@
 * [Redes Neurais](machine-learning/redes-neurais.md)
 * [Pandas](machine-learning/pandas.md)
 * [Métricas de Desempenho](machine-learning/metricas-de-desempenho.md)
+
+## Golang
+
+* [Exemplo de API](golang/exemplo-de-api.md)
