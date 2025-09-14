@@ -41,4 +41,5 @@
 
 ## Golang
 
+* [Boas Práticas](golang/boas-praticas.md)
 * [Exemplo de API](golang/exemplo-de-api.md)
