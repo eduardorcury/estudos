@@ -4,6 +4,11 @@ description: Boas Práticas de desenvolvimento em Go
 
 # Boas Práticas
 
+<!-- TOC -->
+    * [Criar slices com tamanho fixo, caso o tamanho seja conhecido](#criar-slices-com-tamanho-fixo-caso-o-tamanho-seja-conhecido)
+    * [Usar strings.Builder para concatenar um grande número de strings](#usar-stringsbuilder-para-concatenar-um-grande-número-de-strings)
+<!-- TOC -->
+
 ### Criar slices com tamanho fixo, caso o tamanho seja conhecido
 
 A seguir, temos um algoritmo que checa se uma string é um palíndromo. A primeira função cria um slice _letters_ sem tamanho especificado. Já a segunda, cria um slice com o tamanho exato da string informada.
