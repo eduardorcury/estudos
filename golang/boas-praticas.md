@@ -2,11 +2,14 @@
 description: Boas Práticas de desenvolvimento em Go
 ---
 
+# Boas Práticas
+
 ### Criar slices com tamanho fixo, caso o tamanho seja conhecido
 
 A seguir, temos um algoritmo que checa se uma string é um palíndromo. A primeira função cria um slice _letters_ sem tamanho especificado. Já a segunda, cria um slice com o tamanho exato da string informada.
 
-- Slice com tamanho variado:
+* Slice com tamanho variado:
+
 ```go
 func IsPalindrome(s string) bool {
 	var letters []rune
@@ -26,7 +29,8 @@ func IsPalindrome(s string) bool {
 }
 ```
 
-- Slice com tamanho especificado:
+* Slice com tamanho especificado:
+
 ```go
 func IsPalindromeFaster(s string) bool {
 	letters := make([]rune, 0, len(s))
@@ -60,15 +64,14 @@ PASS
 ok      goProject       3.671s
 ```
 
-Isso ocorre por causa da forma como Go trata **slices** e a função **append**.
-Quando o array da slice não tem capacidade suficiente pra incluir um novo elemento, um novo array é criado com uma capacidade maior.
-Quando criamos uma slice com tamanho pré-determinado, evitamos a alocação de memória desnecessária da primeira função, evidenciado pela diferença de allocs/op.
+Isso ocorre por causa da forma como Go trata **slices** e a função **append**. Quando o array da slice não tem capacidade suficiente pra incluir um novo elemento, um novo array é criado com uma capacidade maior. Quando criamos uma slice com tamanho pré-determinado, evitamos a alocação de memória desnecessária da primeira função, evidenciado pela diferença de allocs/op.
 
----
+***
 
 ### Usar strings.Builder para concatenar um grande número de strings
 
 Como as strings em go são imutáveis, usar a concatenação a seguir cria várias strings em memória
+
 ```go
 s := ""
 s += "a"
@@ -77,6 +80,7 @@ s += "c"
 ```
 
 Para evitar isso, usar o **strings.Builder**
+
 ```go
 var sb strings.Builder
 sb.WriteString("x")
