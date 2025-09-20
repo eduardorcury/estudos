@@ -4,12 +4,7 @@ description: Boas Práticas de desenvolvimento em Go
 
 # Boas Práticas
 
-<!-- TOC -->
-    * [Criar slices com tamanho fixo, caso o tamanho seja conhecido](#criar-slices-com-tamanho-fixo-caso-o-tamanho-seja-conhecido)
-    * [Usar strings.Builder para concatenar um grande número de strings](#usar-stringsbuilder-para-concatenar-um-grande-número-de-strings)
-<!-- TOC -->
-
-### Criar slices com tamanho fixo, caso o tamanho seja conhecido
+## Criar slices com tamanho fixo, caso o tamanho seja conhecido
 
 A seguir, temos um algoritmo que checa se uma string é um palíndromo. A primeira função cria um slice _letters_ sem tamanho especificado. Já a segunda, cria um slice com o tamanho exato da string informada.
 
@@ -73,7 +68,7 @@ Isso ocorre por causa da forma como Go trata **slices** e a função **append**.
 
 ***
 
-### Usar strings.Builder para concatenar um grande número de strings
+## Usar strings.Builder para concatenar um grande número de strings
 
 Como as strings em go são imutáveis, usar a concatenação a seguir cria várias strings em memória
 
