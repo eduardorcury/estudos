@@ -1,8 +1,9 @@
 ---
-description: Contéudo sobre métricas e tracing.
+title: "Monitoramento"
+layout: single
+sidebar:
+  nav: main
 ---
-
-# Monitoramento
 
 ## Métricas
 

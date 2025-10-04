@@ -1,4 +1,9 @@
-# Logging
+---
+title: "Logging"
+layout: single
+sidebar:
+  nav: main
+---
 
 ## Logback
 

@@ -1,4 +1,9 @@
-# Docker
+---
+title: "Docker"
+layout: single
+sidebar:
+  nav: main
+---
 
 ## Comandos Básicos
 

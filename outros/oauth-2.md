@@ -1,8 +1,9 @@
 ---
-description: Anotações sobre OAuth 2.0/OpenID/SSO/Keycloak
+title: "OAuth 2"
+layout: single
+sidebar:
+  nav: main
 ---
-
-# Segurança: autenticação e autorização
 
 ## OAuth 2.0
 

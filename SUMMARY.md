@@ -15,13 +15,13 @@
 
 ## Boas Práticas
 
-* [Criando código de qualidade](boas-praticas/boas-praticas-de-desenvolvimento.md)
+* [Criando código de qualidade](boas-praticas/desenvolvimento.md)
 * [Seja um melhor estudante](boas-praticas/seja-um-melhor-estudante.md)
 * [Princípios SOLID](boas-praticas/solid.md)
 
 ## Outros
 
-* [Backend com Node.js](outros/backend-com-node.js.md)
+* [Backend com Node.js](outros/node.md)
 * [Consultas com SQL](outros/consultas-com-sql.md)
 * [Docker](outros/docker.md)
 * [Segurança: autenticação e autorização](outros/oauth-2.md)

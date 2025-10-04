@@ -1,8 +1,9 @@
 ---
-description: Estudos sobre machine learning e redes neurais
+title: "Redes Neurais"
+layout: single
+sidebar:
+  nav: main
 ---
-
-# Redes Neurais
 
 ## Algoritmos de Machine Learning
 
@@ -29,15 +30,11 @@ Parâmetros obrigatórios:
 * Bias;
 * Learning Rate.
 
-???+ note
-
-    Input nodes representa uma feature. Supondo uma rede neural de reconhecimento de imagem, cada input node corresponderia a um pixel de imagem.
-
-***
+> Input nodes representa uma feature. Supondo uma rede neural de reconhecimento de imagem, cada input node corresponderia a um pixel de imagem.
 
 Uma rede neural contém 3 partes: _input layer, hidden layer e output layer_.
 
-<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>Layers de rede neural</p></figcaption></figure>
+<figure><img src="../../assets/images/rede-neural.png" alt=""></figure>
 
 As redes neurais pode ser do tipo:
 
@@ -46,9 +43,7 @@ As redes neurais pode ser do tipo:
 
 ## Matemática de Redes Neurais
 
-???+ note
-
-    Dividida em 5 partes: propagação, cálculo do erro, cálculo dos gradientes, checagem dos gradientes, atualização dos pesos.
+> Dividida em 5 partes: propagação, cálculo do erro, cálculo dos gradientes, checagem dos gradientes, atualização dos pesos.
 
 ### Forward Propagation
 
@@ -62,11 +57,11 @@ $$
 
 em que _x_ é o nó em questão e _w_ é o peso do nó.
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption><p>Forward propagation</p></figcaption></figure>
+<figure><img src="../../assets/images/no-rede.png" alt=""></figure>
 
 O resultado da operação de soma é usado na **função de ativação**.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>Funções de Ativação</p></figcaption></figure>
+<figure><img src="../../assets/images/funcoes-ativacao.png" alt=""></figure>
 
 ### Cálculo do Erro
 
@@ -112,7 +107,7 @@ Os pesos são atualizados usando o método do gradiente.
 
 > Para encontrar um [mínimo](https://pt.wikipedia.org/wiki/M%C3%ADnimo) (local) de uma função usa-se um esquema iterativo, onde em cada passo se toma a direção (negativa) do [gradiente](https://pt.wikipedia.org/wiki/Gradiente), que corresponde à direção de declive máximo.
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/images/cost.png" alt=""></figure>
 
 Existem 3 métodos principais nessa etapa para redes neurais:
 

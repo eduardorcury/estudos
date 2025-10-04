@@ -1,35 +1,38 @@
-<!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+---
+---
+
+<!doctype html>
+{% include copyright.html %}
+<html lang="{{ site.locale | replace: "_", "-" | default: "en" }}" class="no-js">
 <head>
-    <meta charset="UTF-8">
-    <title>{{ page.title }} - {{ site.title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+    {% include head.html %}
+    {% include head/custom.html %}
 </head>
-<body>
-<header>
-    <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
-    <button id="theme-toggle">🌙 Tema</button>
-</header>
 
-<main>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}" dir="{% if site.rtl %}rtl{% else %}ltr{% endif %}">
+{% include_cached skip-links.html %}
+{% include_cached masthead.html %}
+
+<div class="initial-content">
     {{ content }}
-</main>
+    {% include after-content.html %}
+</div>
 
-<script>
-    const toggle = document.getElementById('theme-toggle');
-    const root = document.documentElement;
+{% if site.search == true %}
+<div class="search-content">
+    {% include_cached search/search_form.html %}
+</div>
+{% endif %}
 
-    // Carrega preferência
-    if (localStorage.getItem('theme') === 'dark') {
-        root.setAttribute('data-theme', 'dark');
-    }
+<div id="footer" class="page__footer">
+    <footer>
+        {% include footer/custom.html %}
+        {% include_cached footer.html %}
+    </footer>
+</div>
 
-    toggle.addEventListener('click', () => {
-        const current = root.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        root.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-    });
-</script>
+{% include scripts.html %}
 </body>
 </html>

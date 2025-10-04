@@ -1,8 +1,9 @@
 ---
-description: Boas Práticas de desenvolvimento em Go
+title: "Boas práticas"
+layout: single
+sidebar:
+  nav: main
 ---
-
-# Boas Práticas
 
 ## Criar slices com tamanho fixo, caso o tamanho seja conhecido
 

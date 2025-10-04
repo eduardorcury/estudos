@@ -1,4 +1,9 @@
-# Data Types
+---
+title: "Data Types"
+layout: single
+sidebar:
+  nav: main
+---
 
 ### Tipos primitivos & Referências
 

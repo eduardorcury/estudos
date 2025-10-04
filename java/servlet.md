@@ -1,4 +1,9 @@
-# Servlets
+---
+title: "Servlets"
+layout: single
+sidebar:
+  nav: main
+---
 
 > Objeto que pode ser acessado pelo navegador e que gera respostas HTTP dinamicamente.
 

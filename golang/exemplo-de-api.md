@@ -1,8 +1,9 @@
 ---
-description: Exemplo de implementação de uma API em Golang
+title: "Exemplo de API"
+layout: single
+sidebar:
+  nav: main
 ---
-
-# Exemplo de API
 
 1. Arquivo main
 

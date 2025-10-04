@@ -1,3 +1,10 @@
+---
+title: "SOLID"
+layout: single
+sidebar:
+  nav: main
+---
+
 # Princípios SOLID
 
 ## Single Responsibility Principle

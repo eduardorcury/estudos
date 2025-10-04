@@ -1,4 +1,9 @@
-# Spring Data JPA
+---
+title: "Spring Data JPA"
+layout: single
+sidebar:
+  nav: main
+---
 
 Perguntar sobre repository/entityManager
 

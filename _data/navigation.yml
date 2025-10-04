@@ -1,0 +1,68 @@
+main:
+
+  - title: "Java"
+    children:
+      - title: "Servlet"
+        url: /java/servlet/
+
+  - title: "Golang"
+    children:
+      - title: "Boas práticas"
+        url: /golang/boas-praticas/
+      - title: "Exemplo de API"
+        url: /golang/exemplo-de-api/
+
+  - title: "Spring"
+    children:
+      - title: "Spring Boot Deploy"
+        url: /spring/spring-boot-deploy/
+      - title: "Paginação, Cache e Security"
+        url: /spring/spring-boot-paginacao-cache-and-security/
+      - title: "Spring Data JPA"
+        url: /spring/spring-data-jpa/
+      - title: "Logging"
+        url: /spring/logging/
+
+  - title: "Machine Learning"
+    children:
+      - title: "Pandas"
+        url: /machine-learning/pandas/
+      - title: "Redes Neurais"
+        url: /machine-learning/redes-neurais/
+      - title: "Métricas de Desempenho"
+        url: /machine-learning/metricas-de-desempenho/
+      - title: "Livros"
+        url: /machine-learning/livros/
+
+  - title: "Certificação Java 11"
+    children:
+      - title: "Data Types"
+        url: /certificacao-java-11/data-types/
+      - title: "Variáveis"
+        url: /certificacao-java-11/variaveis/
+
+  - title: "Boas Práticas"
+    children:
+      - title: "Desenvolvimento"
+        url: /boas-praticas/desenvolvimento/
+      - title: "Erros Comuns Spring"
+        url: /boas-praticas/erros-comuns-spring/
+      - title: "Solid"
+        url: /boas-praticas/solid/
+      - title: "Seja um melhor estudante"
+        url: /boas-praticas/seja-um-melhor-estudante/
+
+  - title: "Outros"
+    children:
+      - title: "Docker"
+        url: /outros/docker/
+      - title: "SQL"
+        url: /outros/consultas-com-sql/
+      - title: "Kubernetes"
+        url: /outros/kubernetes/
+      - title: "Monitoramento"
+        url: /outros/monitoramento/
+      - title: "OAuth 2"
+        url: /outros/oauth-2/
+      - title: "Backend com NodeJS"
+        url: /outros/node/

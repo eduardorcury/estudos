@@ -1,3 +1,10 @@
+---
+title: "Seja um melhor estudante"
+layout: single
+sidebar:
+  nav: main
+---
+
 # Seja um melhor estudante
 
 ## Quantidade de Informações

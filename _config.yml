@@ -1,12 +1,37 @@
-title: Meu estudos
-description: Site com estudos de programação
-theme: minima
+# Tema
+theme: minimal-mistakes-jekyll
+
+# Se preferir usar como remote theme, use:
+# remote_theme: "mmistakes/minimal-mistakes"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-include-cache
+
 markdown: kramdown
-include:
-  - java
-  - golang
-  - spring
-  - machine-learning
-  - boas-praticas
-  - certificacao-java-11
-  - outros
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter_opts:
+    disable: true
+
+# Informações básicas do site
+title: Estudos
+description: Repositório de estudos com Markdown usando Minimal Mistakes
+url: "https://eduardorcury.github.io"
+baseurl: "/estudos"  # ou "" se for no root
+
+# Configurações de skin / aparência do tema
+minimal_mistakes_skin: "dark"  # ou “default”, “air”, etc.
+# Você pode mudar para "dark" para iniciar com tema escuro
+
+# Se você quiser sidebar customizada, usar defaults com sidebar.nav
+defaults:
+  - scope:
+      path: ""   # aplica a todo site
+      type: pages
+    values:
+      layout: single
+      sidebar:
+        nav: main

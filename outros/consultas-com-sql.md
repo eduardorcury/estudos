@@ -1,4 +1,9 @@
-# Consultas com SQL
+---
+title: "SQL"
+layout: single
+sidebar:
+  nav: main
+---
 
 ## DATABASE sucos\_vendas
 

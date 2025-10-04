@@ -1,20 +1,17 @@
 ---
-description: >-
-  Definição das principais de métricas de desempenho de um classificador:
-  precisão, revocação, matriz de confusão, etc.
+title: "Métricas de Desempenho"
+layout: single
+sidebar:
+  nav: main
 ---
 
-# Métricas de Desempenho
-
-???+ note
-
-    O cálculo do desempenho de um classificador é mais difícil que avaliar o desempenho de um regressor. Nesse cálculo, é preciso entender os conceitos de matriz de confusão, precisão, revocação (taxa de verdadeiros positivos), acurácia e taxa de falsos positivos.
+> O cálculo do desempenho de um classificador é mais difícil que avaliar o desempenho de um regressor. Nesse cálculo, é preciso entender os conceitos de matriz de confusão, precisão, revocação (taxa de verdadeiros positivos), acurácia e taxa de falsos positivos.
 
 ### Matriz de Confusão
 
 Uma matriz de confusão de um classificador é uma tabela em que cada linha representa uma classe real e cada coluna representa uma classe prevista. A primeira célula da primeira linha representa o número de **verdadeiros positivos**, ou seja, o número de instâncias que o classificador corretamente determinou pertencerem à classe positiva. A segunda célula da primeira linha representa os **falso positivos**, o número de instâncias classificadas como negativos mas que na realidade não são. Da mesma forma, a primeira célula da segunda linha representa a quantidade de instâncias classificadas como positivas e que não são (**falso positivos**), e a segunda célula da segunda linha é o número de instâncias negativas que foram corretamente classificadas como negativas (**verdadeiros negativos**).
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/images/metricas-desempenho.png" alt=""><figcaption></figcaption></figure>
 
 ### Métricas
 

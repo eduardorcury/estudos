@@ -1,4 +1,9 @@
-# Variáveis
+---
+title: "Variáveis"
+layout: single
+sidebar:
+  nav: main
+---
 
 #### Identificadores
 
@@ -9,7 +14,7 @@
 3. Identificadores não podem começar com números.
 4.  Identificadores não podem ser iguais a alguma palavra reservada (considerando letras minúsculas e maiúsculas).
 
-    :white\_check\_mark:
+    ✅
 
     ```java
     String $;  
@@ -23,7 +28,7 @@
     public void $teste() {}
     ```
 
-    :x:
+    ❌
 
     ```java
     String 1_$;  
@@ -40,7 +45,7 @@
 1. Números podem conter \_ entre dígitos, mas não podem começar com \_.
 2.  Números podem começar com 1-9, 0, 0x, 0X, 0b ou 0B.
 
-    :white\_check\_mark:
+    ✅
 
     ```java
     int a = 1_00000;  
@@ -50,7 +55,7 @@
     int e = 0B100;
     ```
 
-    :x:
+    ❌
 
     ```java
     double f = 1_0_;  

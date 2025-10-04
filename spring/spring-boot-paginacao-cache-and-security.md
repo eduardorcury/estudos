@@ -1,4 +1,9 @@
-# Cache, Security & Paginação
+---
+title: "Paginação, Cache e Security"
+layout: single
+sidebar:
+  nav: main
+---
 
 ## Paginação & Ordenação
 
