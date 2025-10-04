@@ -8,10 +8,13 @@ plugins:
   - jekyll-include-cache
 
 markdown: kramdown
+highlighter: rouge
 kramdown:
-  math_engine: mathjax
+  input: GFM
+  syntax_highlighter: rouge
   syntax_highlighter_opts:
-    disable: true
+    css_class: 'highlight'
+  math_engine: mathjax
 
 # Informações básicas do site
 title: Estudos
