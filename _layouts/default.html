@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }} - {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+</head>
+<body>
+<header>
+    <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+    <button id="theme-toggle">🌙 Tema</button>
+</header>
+
+<main>
+    {{ content }}
+</main>
+
+<script>
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    // Carrega preferência
+    if (localStorage.getItem('theme') === 'dark') {
+        root.setAttribute('data-theme', 'dark');
+    }
+
+    toggle.addEventListener('click', () => {
+        const current = root.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+    });
+</script>
+</body>
+</html>

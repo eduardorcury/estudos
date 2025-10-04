@@ -1,4 +1,12 @@
 title: Meu estudos
 description: Site com estudos de programação
-theme: minima
+theme: minimal-mistakes-jekyll
 markdown: kramdown
+include:
+  - java
+  - golang
+  - spring
+  - machine-learning
+  - boas-praticas
+  - certificacao-java-11
+  - outros
