@@ -29,9 +29,9 @@ Parâmetros obrigatórios:
 * Bias;
 * Learning Rate.
 
-{% hint style="info" %}
-Input nodes representa uma feature. Supondo uma rede neural de reconhecimento de imagem, cada input node corresponderia a um pixel de imagem.
-{% endhint %}
+???+ note
+
+    Input nodes representa uma feature. Supondo uma rede neural de reconhecimento de imagem, cada input node corresponderia a um pixel de imagem.
 
 ***
 
@@ -46,9 +46,9 @@ As redes neurais pode ser do tipo:
 
 ## Matemática de Redes Neurais
 
-{% hint style="info" %}
-Dividida em 5 partes: propagação, cálculo do erro, cálculo dos gradientes, checagem dos gradientes, atualização dos pesos.
-{% endhint %}
+???+ note
+
+    Dividida em 5 partes: propagação, cálculo do erro, cálculo dos gradientes, checagem dos gradientes, atualização dos pesos.
 
 ### Forward Propagation
 

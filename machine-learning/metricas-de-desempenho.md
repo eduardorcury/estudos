@@ -6,9 +6,9 @@ description: >-
 
 # Métricas de Desempenho
 
-{% hint style="info" %}
-O cálculo do desempenho de um classificador é mais difícil que avaliar o desempenho de um regressor. Nesse cálculo, é preciso entender os conceitos de matriz de confusão, precisão, revocação (taxa de verdadeiros positivos), acurácia e taxa de falsos positivos.
-{% endhint %}
+???+ note
+
+    O cálculo do desempenho de um classificador é mais difícil que avaliar o desempenho de um regressor. Nesse cálculo, é preciso entender os conceitos de matriz de confusão, precisão, revocação (taxa de verdadeiros positivos), acurácia e taxa de falsos positivos.
 
 ### Matriz de Confusão
 

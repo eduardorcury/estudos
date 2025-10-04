@@ -16,9 +16,9 @@ O método RED (Rate, Errors & Duration) analisa a quantidade de solicitações p
 
 > Using these basic metrics most problems that an end user might face with your web app can be captured, such as how many errors there are and how slow their service is ([fonte](https://www.weave.works/docs/cloud/latest/tasks/monitor/best-instrumenting/)).
 
-{% hint style="info" %}
-Uma das limitações desse método é que ele só pode ser usado em aplicações que lidam com requisições, sendo inadequado em sistemas \_batch \_ou de _streaming_.
-{% endhint %}
+???+ note
+
+    Uma das limitações desse método é que ele só pode ser usado em aplicações que lidam com requisições, sendo inadequado em sistemas \_batch \_ou de _streaming_.
 
 ### Método USE
 
@@ -138,9 +138,9 @@ Labels são usadas para diferenciar características da métrica. Por exemplo, u
 
 `proposta_criadas_total {aplicacao="serviço de proposta", ambiente="desenvolvimento | produção | QA"}`
 
-{% hint style="info" %}
-A criação de Labels aumenta significativamente a quantidade de dados armazenados. Elas não devem ser usadas em casos em que há várias opções, como por exemplo labels para IDs, e-mails, etc.
-{% endhint %}
+???+ note
+
+    A criação de Labels aumenta significativamente a quantidade de dados armazenados. Elas não devem ser usadas em casos em que há várias opções, como por exemplo labels para IDs, e-mails, etc.
 
 ### Micrometer
 
@@ -152,9 +152,9 @@ O Micrometer consegue expor métricas da aplicação para diferentes clientes de
 registry.config().commonTags("env", "prod"); 
 ```
 
-{% hint style="info" %}
-No Spring, as Tags devem ser adicionadas através do **`MeterRegistryCustomizer`** para assegurar que elas serão configuradas primeiro.
-{% endhint %}
+???+ note
+
+    No Spring, as Tags devem ser adicionadas através do **`MeterRegistryCustomizer`** para assegurar que elas serão configuradas primeiro.
 
 ```java
 @Bean
