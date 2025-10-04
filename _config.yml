@@ -1,6 +1,3 @@
-# Tema
-theme: minimal-mistakes-jekyll
-
 # Se preferir usar como remote theme, use:
 remote_theme: "mmistakes/minimal-mistakes@4.27.3"
 
