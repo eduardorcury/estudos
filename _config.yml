@@ -1,6 +1,6 @@
 title: Meu estudos
 description: Site com estudos de programação
-theme: minimal-mistakes-jekyll
+theme: minima
 markdown: kramdown
 include:
   - java
