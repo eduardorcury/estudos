@@ -15,7 +15,7 @@ kramdown:
 
 # Informações básicas do site
 title: Estudos
-description: Repositório de estudos com Markdown usando Minimal Mistakes
+description: Repositório de estudos de programação
 url: "https://eduardorcury.github.io"
 baseurl: "/estudos"  # ou "" se for no root
 
