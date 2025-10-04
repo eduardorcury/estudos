@@ -17,7 +17,7 @@ kramdown:
 title: Estudos
 description: Repositório de estudos com Markdown usando Minimal Mistakes
 url: "https://eduardorcury.github.io"
-baseurl: "/estudos"  # ou "" se for no root
+baseurl: ""  # ou "" se for no root
 
 # Configurações de skin / aparência do tema
 minimal_mistakes_skin: "dark"  # ou “default”, “air”, etc.
