@@ -9,7 +9,7 @@ description: Boas Práticas de desenvolvimento em Go
 A seguir, temos um algoritmo que checa se uma string é um palíndromo. A primeira função cria um slice _letters_ sem tamanho especificado. Já a segunda, cria um slice com o tamanho exato da string informada.
 
 * Slice com tamanho variado:
-
+ 
 ```go
 func IsPalindrome(s string) bool {
 	var letters []rune
