@@ -3,6 +3,7 @@ title: "Livros"
 layout: single
 sidebar:
   nav: main
+permalink: /machine-learning/livros/
 ---
 
 <table data-view="cards">

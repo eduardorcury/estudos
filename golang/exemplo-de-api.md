@@ -3,6 +3,7 @@ title: "Exemplo de API"
 layout: single
 sidebar:
   nav: main
+permalink: /golang/exemplo-de-api/
 ---
 
 1. Arquivo main

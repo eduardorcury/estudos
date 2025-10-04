@@ -3,6 +3,7 @@ title: "OAuth 2"
 layout: single
 sidebar:
   nav: main
+permalink: /outros/oauth-2/
 ---
 
 ## OAuth 2.0

@@ -3,6 +3,7 @@ title: "Spring Boot Deploy"
 layout: single
 sidebar:
   nav: main
+permalink: /spring/spring-boot-deploy/
 ---
 
 ## Variáveis de ambiente

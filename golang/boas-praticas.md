@@ -3,6 +3,7 @@ title: "Boas práticas"
 layout: single
 sidebar:
   nav: main
+permalink: /golang/boas-praticas/
 ---
 
 ## Criar slices com tamanho fixo, caso o tamanho seja conhecido

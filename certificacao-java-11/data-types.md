@@ -3,6 +3,7 @@ title: "Data Types"
 layout: single
 sidebar:
   nav: main
+permalink: /certificacao-java-11/data-types/
 ---
 
 ### Tipos primitivos & Referências

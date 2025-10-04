@@ -3,6 +3,7 @@ title: "Spring Data JPA"
 layout: single
 sidebar:
   nav: main
+permalink: /spring/spring-data-jpa/
 ---
 
 Perguntar sobre repository/entityManager

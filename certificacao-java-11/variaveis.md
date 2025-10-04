@@ -3,6 +3,7 @@ title: "Variáveis"
 layout: single
 sidebar:
   nav: main
+permalink: /certificacao-java-11/variaveis/
 ---
 
 #### Identificadores

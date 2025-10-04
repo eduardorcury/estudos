@@ -3,6 +3,7 @@ title: "Docker"
 layout: single
 sidebar:
   nav: main
+permalink: /outros/docker/
 ---
 
 ## Comandos Básicos

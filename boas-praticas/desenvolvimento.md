@@ -3,6 +3,7 @@ title: "Desenvolvimento"
 layout: single
 sidebar:
   nav: main
+permalink: /boas-praticas/desenvolvimento/
 ---
 
 ## Criando código de qualidade

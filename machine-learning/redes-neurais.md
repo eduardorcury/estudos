@@ -3,6 +3,7 @@ title: "Redes Neurais"
 layout: single
 sidebar:
   nav: main
+permalink: /machine-learning/redes-neurais/
 ---
 
 ## Algoritmos de Machine Learning

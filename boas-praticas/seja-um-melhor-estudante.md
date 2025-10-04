@@ -3,6 +3,7 @@ title: "Seja um melhor estudante"
 layout: single
 sidebar:
   nav: main
+permalink: /boas-praticas/seja-um-melhor-estudante/
 ---
 
 # Seja um melhor estudante

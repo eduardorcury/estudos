@@ -3,6 +3,7 @@ title: "SOLID"
 layout: single
 sidebar:
   nav: main
+permalink: /boas-praticas/solid/
 ---
 
 # Princípios SOLID

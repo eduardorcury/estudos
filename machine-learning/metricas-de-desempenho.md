@@ -3,6 +3,7 @@ title: "Métricas de Desempenho"
 layout: single
 sidebar:
   nav: main
+permalink: /machine-learning/metricas-de-desempenho/
 ---
 
 > O cálculo do desempenho de um classificador é mais difícil que avaliar o desempenho de um regressor. Nesse cálculo, é preciso entender os conceitos de matriz de confusão, precisão, revocação (taxa de verdadeiros positivos), acurácia e taxa de falsos positivos.

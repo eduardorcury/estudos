@@ -3,6 +3,7 @@ title: "Kubernetes"
 layout: single
 sidebar:
   nav: main
+permalink: /outros/kubernetes/
 ---
 
 ## Definições

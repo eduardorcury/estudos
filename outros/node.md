@@ -3,6 +3,7 @@ title: "Backend com NodeJS"
 layout: single
 sidebar:
   nav: main
+permalink: /outros/node/
 ---
 
 > Next Level Week #4

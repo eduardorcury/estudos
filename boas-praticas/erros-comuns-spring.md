@@ -3,6 +3,7 @@ title: "Erros Comuns Spring"
 layout: single
 sidebar:
   nav: main
+permalink: /boas-praticas/erros-comuns-spring/
 ---
 
 # Erros comuns no desenvolvimento Spring

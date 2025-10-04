@@ -3,6 +3,7 @@ title: "Pandas"
 layout: single
 sidebar:
   nav: main
+permalink: /machine-learning/pandas/
 ---
 
 ## Comandos

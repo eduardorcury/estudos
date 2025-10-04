@@ -3,6 +3,7 @@ title: "Paginação, Cache e Security"
 layout: single
 sidebar:
   nav: main
+permalink: /spring/spring-boot-paginacao-cache-and-security/
 ---
 
 ## Paginação & Ordenação

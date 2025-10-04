@@ -3,6 +3,7 @@ title: "SQL"
 layout: single
 sidebar:
   nav: main
+permalink: /outros/consultas-com-sql/
 ---
 
 ## DATABASE sucos\_vendas

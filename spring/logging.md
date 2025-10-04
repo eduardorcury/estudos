@@ -3,6 +3,7 @@ title: "Logging"
 layout: single
 sidebar:
   nav: main
+permalink: /spring/logging/
 ---
 
 ## Logback

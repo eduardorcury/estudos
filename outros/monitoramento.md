@@ -3,6 +3,7 @@ title: "Monitoramento"
 layout: single
 sidebar:
   nav: main
+permalink: /outros/monitoramento/
 ---
 
 ## Métricas
