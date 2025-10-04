@@ -3,66 +3,66 @@ main:
   - title: "Java"
     children:
       - title: "Servlet"
-        url: /estudos/java/servlet/
+        url: /java/servlet/
 
   - title: "Golang"
     children:
       - title: "Boas práticas"
-        url: /estudos/golang/boas-praticas/
+        url: /golang/boas-praticas/
       - title: "Exemplo de API"
-        url: /estudos/golang/exemplo-de-api/
+        url: /golang/exemplo-de-api/
 
   - title: "Spring"
     children:
       - title: "Spring Boot Deploy"
-        url: /estudos/spring/spring-boot-deploy/
+        url: /spring/spring-boot-deploy/
       - title: "Paginação, Cache e Security"
-        url: /estudos/spring/spring-boot-paginacao-cache-and-security/
+        url: /spring/spring-boot-paginacao-cache-and-security/
       - title: "Spring Data JPA"
-        url: /estudos/spring/spring-data-jpa/
+        url: /spring/spring-data-jpa/
       - title: "Logging"
-        url: /estudos/spring/logging/
+        url: /spring/logging/
 
   - title: "Machine Learning"
     children:
       - title: "Pandas"
-        url: /estudos/machine-learning/pandas/
+        url: /machine-learning/pandas/
       - title: "Redes Neurais"
-        url: /estudos/machine-learning/redes-neurais/
+        url: /machine-learning/redes-neurais/
       - title: "Métricas de Desempenho"
-        url: /estudos/machine-learning/metricas-de-desempenho/
+        url: /machine-learning/metricas-de-desempenho/
       - title: "Livros"
-        url: /estudos/machine-learning/livros/
+        url: /machine-learning/livros/
 
   - title: "Certificação Java 11"
     children:
       - title: "Data Types"
-        url: /estudos/certificacao-java-11/data-types/
+        url: /certificacao-java-11/data-types/
       - title: "Variáveis"
-        url: /estudos/certificacao-java-11/variaveis/
+        url: /certificacao-java-11/variaveis/
 
   - title: "Boas Práticas"
     children:
       - title: "Desenvolvimento"
-        url: /estudos/boas-praticas/desenvolvimento/
+        url: /boas-praticas/desenvolvimento/
       - title: "Erros Comuns Spring"
-        url: /estudos/boas-praticas/erros-comuns-spring/
+        url: /boas-praticas/erros-comuns-spring/
       - title: "Solid"
-        url: /estudos/boas-praticas/solid/
+        url: /boas-praticas/solid/
       - title: "Seja um melhor estudante"
-        url: /estudos/boas-praticas/seja-um-melhor-estudante/
+        url: /boas-praticas/seja-um-melhor-estudante/
 
   - title: "Outros"
     children:
       - title: "Docker"
-        url: /estudos/outros/docker/
+        url: /outros/docker/
       - title: "SQL"
-        url: /estudos/outros/consultas-com-sql/
+        url: /outros/consultas-com-sql/
       - title: "Kubernetes"
-        url: /estudos/outros/kubernetes/
+        url: /outros/kubernetes/
       - title: "Monitoramento"
-        url: /estudos/outros/monitoramento/
+        url: /outros/monitoramento/
       - title: "OAuth 2"
-        url: /estudos/outros/oauth-2/
+        url: /outros/oauth-2/
       - title: "Backend com NodeJS"
-        url: /estudos/outros/node/
+        url: /outros/node/
