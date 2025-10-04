@@ -3,6 +3,7 @@ title: "Servlets"
 layout: single
 sidebar:
   nav: main
+permalink: /java/servlet/
 ---
 
 > Objeto que pode ser acessado pelo navegador e que gera respostas HTTP dinamicamente.
